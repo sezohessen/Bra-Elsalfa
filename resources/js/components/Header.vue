@@ -3,8 +3,8 @@ import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 import NamePopup from "@/components/NamePopup.vue";
-import { generateRandomId } from '../utils/generateRoomID';
-import getIP from '../utils/getIP';
+import { createRoom } from '../utils/createGame';
+
 
 export default {
     props: {
@@ -17,46 +17,21 @@ export default {
             default: true,
         },
     },
-    setup(props) {
+    setup() {
         const showNamePopup = ref(false);
         const route = useRoute();
         const isHomePage = computed(() => {
             return route.path === '/';
         });
 
-        function createRoom(name) {
-            const randomId = generateRandomId(16);
-            getIP().then((creatorIP) => {
-                const players = [
-                    {
-                        "guestName": name,
-                        "guestIP": creatorIP
-                    }
-                ];
-                const game = {
-                    "gameID": randomId,
-                    "creatorIP": creatorIP,
-                    "players": players
-                };
-                const storedGames = JSON.parse(sessionStorage.getItem('games') || '[]');
-
-                sessionStorage.setItem('guestName', name);
-                sessionStorage.setItem(`game-${randomId}`, JSON.stringify(game));
-                window.location.href = `/lobby/${randomId}`;
-            }).catch((error) => {
-                console.error(error);
-                // Handle error
-            });
-        }
 
         function showPopup() {
             showNamePopup.value = true;
         }
 
-        function onSubmitName(name) {
-            createRoom(name);
+        function onSubmitName(creatorName) {
+            createRoom(creatorName);
         }
-
 
         return {
             showPopup,
@@ -81,7 +56,7 @@ export default {
         <div class="header-right" v-if="isHomePage">
             <button class="create-button" @click="showPopup">Create Room</button>
         </div>
-        <NamePopup v-if="showNamePopup" @submit-name="onSubmitName" />
+        <NamePopup v-if="showNamePopup" @submit-name="onSubmitName" :creatorName="creatorName"/>
     </header>
 </template>
   
