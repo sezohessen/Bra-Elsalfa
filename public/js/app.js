@@ -17965,8 +17965,9 @@ __webpack_require__.r(__webpack_exports__);
           "creatorIP": creatorIP,
           "players": players
         };
+        var storedGames = JSON.parse(sessionStorage.getItem('games') || '[]');
         sessionStorage.setItem('guestName', name);
-        sessionStorage.setItem('game', JSON.stringify(game));
+        sessionStorage.setItem("game-".concat(randomId), JSON.stringify(game));
         window.location.href = "/lobby/".concat(randomId);
       })["catch"](function (error) {
         console.error(error);
@@ -18249,7 +18250,7 @@ var getIP = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return fetch("https://api.ipify.org/?format=json");
+          return fetch("https://ipapi.co/json/");
         case 2:
           response = _context.sent;
           _context.next = 5;

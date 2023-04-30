@@ -38,8 +38,10 @@ export default {
                     "creatorIP": creatorIP,
                     "players": players
                 };
+                const storedGames = JSON.parse(sessionStorage.getItem('games') || '[]');
+
                 sessionStorage.setItem('guestName', name);
-                sessionStorage.setItem('game', JSON.stringify(game));
+                sessionStorage.setItem(`game-${randomId}`, JSON.stringify(game));
                 window.location.href = `/lobby/${randomId}`;
             }).catch((error) => {
                 console.error(error);
