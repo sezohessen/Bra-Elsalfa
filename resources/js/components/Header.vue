@@ -1,6 +1,10 @@
 <script>
 import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
+
 import NamePopup from "@/components/NamePopup.vue";
+import { generateRandomId } from '../utils/generateRoomID';
+import getIP from '../utils/getIP';
 
 export default {
     props: {
@@ -15,14 +19,32 @@ export default {
     },
     setup(props) {
         const showNamePopup = ref(false);
+        const route = useRoute();
+        const isHomePage = computed(() => {
+            return route.path === '/';
+        });
 
         function createRoom(name) {
-            const randomId = Array.from({ length: 16 }, () => Math.floor(Math.random() * 35).toString(35)).join('');
-
-
-
-            sessionStorage.setItem('guestName', name);
-            window.location.href = `/lobby/${randomId}`;
+            const randomId = generateRandomId(16);
+            getIP().then((creatorIP) => {
+                const players = [
+                    {
+                        "guestName": name,
+                        "guestIP": creatorIP
+                    }
+                ];
+                const game = {
+                    "gameID": randomId,
+                    "creatorIP": creatorIP,
+                    "players": players
+                };
+                sessionStorage.setItem('guestName', name);
+                sessionStorage.setItem('game', JSON.stringify(game));
+                window.location.href = `/lobby/${randomId}`;
+            }).catch((error) => {
+                console.error(error);
+                // Handle error
+            });
         }
 
         function showPopup() {
@@ -32,10 +54,13 @@ export default {
         function onSubmitName(name) {
             createRoom(name);
         }
+
+
         return {
             showPopup,
             onSubmitName,
-            showNamePopup
+            showNamePopup,
+            isHomePage
         };
     },
     components: {
@@ -51,7 +76,7 @@ export default {
                 <h1 class="header-title">{{ headerTitle }}</h1>
             </router-link>
         </div>
-        <div class="header-right">
+        <div class="header-right" v-if="isHomePage">
             <button class="create-button" @click="showPopup">Create Room</button>
         </div>
         <NamePopup v-if="showNamePopup" @submit-name="onSubmitName" />
