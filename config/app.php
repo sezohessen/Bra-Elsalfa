@@ -210,6 +210,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Holder' => App\Http\Livewire\Holder\Index::class,
     ])->toArray(),
 
 ];

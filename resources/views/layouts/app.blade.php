@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Guess Who</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
-        integrity="sha512-eHx4nbBTkIr2i0m9SANm/cczPESd0DUEcfl84JpIuutE6oDxPhXvskMR08Wmvmfx5wUpVjlWdi82G5YLvqqJdA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="{{ asset('main.css') }}">
-    <!-- Fonts -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
 
 </head>
 
 <body>
-    @yield('game')
+    <div id="app">
+        @yield('content')
+    </div>
+
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 
 </html>
