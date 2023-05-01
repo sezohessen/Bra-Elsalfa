@@ -39,6 +39,21 @@ class Game extends Model
         'current_round',
     ];
 
+
+    public function addPlayer(Player $player, $isCreator = false)
+    {
+        $gamePlayerData = [
+            $player->id => [
+                'id'         => Str::uuid()->toString(),
+                'is_creator' => $isCreator,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ];
+
+        $this->players()->syncWithoutDetaching($gamePlayerData);
+    }
+
     public function players()
     {
         return $this->belongsToMany(Player::class, 'game_players')

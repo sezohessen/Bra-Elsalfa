@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class GamePlayer extends Model
 {
     use HasFactory;
 
-    protected $keyType = 'string'; 
+    protected $keyType = 'string';
     public $incrementing = false;
-    
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -33,6 +35,4 @@ class GamePlayer extends Model
     protected $casts = [
         'is_creator' => 'boolean',
     ];
-
-
 }

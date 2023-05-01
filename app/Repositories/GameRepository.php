@@ -50,7 +50,7 @@ class GameRepository implements RepositoryInterface
         if (!$game) {
             return false;
         }
-
+        $game->players()->delete();
         return $game->delete();
     }
 }

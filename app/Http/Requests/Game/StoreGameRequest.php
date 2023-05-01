@@ -23,6 +23,8 @@ class StoreGameRequest extends FormRequest
     {
         return [
             'game_theme_id' => 'required|exists:game_themes,id',
+            'player_ip'     => 'required',
+            'name'          => 'nullable',
         ];
     }
 }

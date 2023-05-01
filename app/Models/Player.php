@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Player extends Model
 {
@@ -12,7 +13,6 @@ class Player extends Model
 
     protected $keyType = 'string';
     public $incrementing = false;
-
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +23,20 @@ class Player extends Model
         'ip_address',
         'name',
     ];
+
+         /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->id = Str::uuid()->toString();
+        });
+    }
 
     public function games()
     {
