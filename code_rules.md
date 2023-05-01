@@ -1,5 +1,3 @@
-Sure, I can rewrite it with clearer explanations and organized formatting using GitHub syntax:
-
 ### Code Consistency Rules
 
 In order to maintain a consistent and understandable codebase, it is important to follow some code consistency rules. These rules will help ensure that the code is easy to read, maintain, and understand. Here are some examples of code consistency rules that you should follow:
