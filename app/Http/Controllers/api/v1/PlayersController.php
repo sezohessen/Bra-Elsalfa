@@ -3,15 +3,22 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Models\Game;
-use App\Models\Player;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\RequireGame;
 use App\Http\Requests\Player\CreatePlayerRequest;
 use App\Http\Requests\Player\UpdatePlayerRequest;
+use App\Repositories\PlayerRepository;
 
 class PlayersController extends Controller
 {
-     /**
+    protected $playerRepository;
+
+    public function __construct(PlayerRepository $playerRepository)
+    {
+        $this->playerRepository = $playerRepository;
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -20,7 +27,7 @@ class PlayersController extends Controller
     {
         $game = Game::findOrFail($require->game);
 
-        $players = $game->players;
+        $players = $this->playerRepository->getAll($game);
 
         return response()->json($players);
     }
@@ -33,10 +40,7 @@ class PlayersController extends Controller
      */
     public function store(CreatePlayerRequest $request)
     {
-        $player             = new Player;
-        $player->name       = $request->name;
-        $player->ip_address = $request->ip_address;
-        $player->save();
+        $player = $this->playerRepository->create($request->name, $request->ip_address);
 
         return response()->json($player, 201);
     }
@@ -49,7 +53,7 @@ class PlayersController extends Controller
      */
     public function show($id)
     {
-        $player = Player::findOrFail($id);
+        $player = $this->playerRepository->getOne($id);
 
         return response()->json($player);
     }
@@ -63,9 +67,9 @@ class PlayersController extends Controller
      */
     public function update(UpdatePlayerRequest $request, $id)
     {
-        $player = Player::findOrFail($id);
-        $player->name = $request->name;
-        $player->save();
+        $this->playerRepository->update($id, ['name' => $request->name]);
+
+        $player = $this->playerRepository->getOne($id);
 
         return response()->json($player);
     }
@@ -78,8 +82,7 @@ class PlayersController extends Controller
      */
     public function destroy($id)
     {
-        $player = Player::findOrFail($id);
-        $player->delete();
+        $this->playerRepository->delete($id);
 
         return response()->json(null, 204);
     }
