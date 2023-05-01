@@ -14,16 +14,14 @@ models:
     - num_players: integer
     - current_round: integer
     - relationships:
-        belongsTo: players
+        belongsTo: player
         hasMany: gamePlayers
 
   gamePlayers:
     - id: uuid
     - game_id: uuid
     - player_id: uuid
-    - role: enum('normal','outcast')
+    - role: enum("normal","outcast")
     - relationships:
-        belongsTo:
-          - players
-          - games
+        belongsTo: players, games 
 
