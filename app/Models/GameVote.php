@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Game extends Model
+class GameVote extends Model
 {
     use HasFactory;
+
 
     protected $keyType = 'string'; 
     public $incrementing = false;
@@ -19,13 +19,8 @@ class Game extends Model
      * @var array
      */
     protected $fillable = [
-        'game_theme',
-        'game_answer',
-        'current_round',
+        'game_id',
+        'voter_id',
+        'voted_id',
     ];
-
-    public function gamePlayers(): HasMany
-    {
-        return $this->hasMany(GamePlayers::class);
-    }
 }

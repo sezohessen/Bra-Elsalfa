@@ -10,6 +10,9 @@ class GamePlayer extends Model
 {
     use HasFactory;
 
+    protected $keyType = 'string'; 
+    public $incrementing = false;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -19,25 +22,20 @@ class GamePlayer extends Model
         'game_id',
         'player_id',
         'role',
+        'is_creator',
     ];
 
-    public function players(): BelongsTo
-    {
-        return $this->belongsTo(\App\Models\gamePlayers::class);
-    }
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_creator' => 'boolean',
+    ];
 
-    public function games(): BelongsTo
+    public function playersGames(): BelongsTo
     {
-        return $this->belongsTo(Games::class);
-    }
-
-    public function game(): BelongsTo
-    {
-        return $this->belongsTo(Game::class);
-    }
-
-    public function player(): BelongsTo
-    {
-        return $this->belongsTo(Player::class);
+        return $this->belongsTo(PlayersGames::class);
     }
 }
