@@ -5,6 +5,8 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Game;
+use App\Models\GameTheme;
+use App\Models\ThemeObject;
 
 class GameFactory extends Factory
 {
@@ -19,12 +21,16 @@ class GameFactory extends Factory
      * Define the model's default state.
      */
     public function definition(): array
-    { 
-        return [
-            'id' => Str::uuid(),
-            'game_theme' => $this->faker->word,
-            'game_answer' => $this->faker->word,
-            'current_round' => $this->faker->numberBetween(1, 10),
-        ];
+    {
+        $themes     = GameTheme::all();
+        foreach ($themes as $theme) {
+            $themeObject = ThemeObject::where('game_theme_id', $theme->id)->inRandomOrder()->first();
+            return [
+                'id' => Str::uuid(),
+                'game_theme_id' => $theme->id,
+                'game_answer_id' => $themeObject->id,
+                'current_round' => $this->faker->numberBetween(1, 10),
+            ];
+        }
     }
 }

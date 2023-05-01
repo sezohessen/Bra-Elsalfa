@@ -9,9 +9,9 @@ class GameTheme extends Model
 {
     use HasFactory;
 
-    protected $keyType = 'string'; 
+    protected $keyType = 'string';
     public $incrementing = false;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,4 +20,15 @@ class GameTheme extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function games()
+    {
+        return $this->hasMany(Game::class);
+    }
+
+    public function themeObjects()
+    {
+        return $this->hasMany(GameObject::class);
+    }
+
 }

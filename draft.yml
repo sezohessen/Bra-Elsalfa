@@ -4,15 +4,16 @@ models:
     - ip_address: string
     - name: string,nullable
     - relationships:
-        hasMany: gamePlayers
+        hasMany: game_players
 
   Game:
     - id: uuid
-    - game_theme: string
+    - game_theme_id: uuid(foreign:game_theme.id)
     - game_answer: string
     - current_round: integer
     - relationships:
-        hasMany: gamePlayers
+        hasMany: game_players
+        belongsTo: game_themes
 
   GamePlayer:
     - id: uuid
@@ -34,11 +35,12 @@ models:
   GameTheme:
     - id: uuid
     - name: string
+    - relationships:
+        hasMany: game_objects
 
-  Animal:
-    - id: uuid
+  GameObject:
+    - id: uui
+    - game_theme_id: uuid(foreign:game_theme.id)
     - name: string
-
-  Country:
-    - id: uuid
-    - name: string
+    - relationships:
+      belongsTo: game_themes
