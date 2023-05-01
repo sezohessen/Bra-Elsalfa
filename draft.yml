@@ -1,27 +1,48 @@
 models:
-  players:
+  Player:
     - id: uuid
     - ip_address: string
     - name: string,nullable
     - relationships:
         hasMany: gamePlayers
 
-  games:
+  Game:
     - id: uuid
-    - creator_id: uuid
-    - num_rounds: integer
     - game_theme: string
-    - num_players: integer
+    - game_answer: string
     - current_round: integer
     - relationships:
-        belongsTo: player
         hasMany: gamePlayers
 
-  gamePlayers:
+  GamePlayer:
     - id: uuid
-    - game_id: uuid
-    - player_id: uuid
+    - game_id: uuid(foreign:games.id)
+    - player_id: uuid(foreign:players.id)
     - role: enum("normal","outcast")
+    - is_creator: boolean
     - relationships:
-        belongsTo: players, games 
+        belongsTo: 
+          - players
+          - games
 
+  GameVote:
+    - id: uuid(primary)
+    - game_id: uuid(foreign:games.id)
+    - voter_id: uuid(foreign:players.id)
+    - voted_id: uuid(foreign:players.id)
+    - relationships:
+        belongsTo:
+          - players: [voter_id, voted_id]
+          - games: game_id
+
+  GameTheme:
+    - id: uuid
+    - name: string
+
+  Animal:
+    - id: uuid
+    - name: string
+
+  Country:
+    - id: uuid
+    - name: string
