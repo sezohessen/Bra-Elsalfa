@@ -10,7 +10,7 @@ class Player extends Model
 {
     use HasFactory;
 
-    protected $keyType = 'string'; 
+    protected $keyType = 'string';
     public $incrementing = false;
 
 
@@ -24,8 +24,9 @@ class Player extends Model
         'name',
     ];
 
-    public function gamePlayers(): HasMany
+    public function games()
     {
-        return $this->hasMany(GamePlayers::class);
+        return $this->belongsToMany(Game::class, 'game_players')
+            ->withPivot('role', 'is_creator');
     }
 }

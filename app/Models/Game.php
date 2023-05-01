@@ -24,8 +24,11 @@ class Game extends Model
         'current_round',
     ];
 
-    public function gamePlayers(): HasMany
+    public function players()
     {
-        return $this->hasMany(GamePlayers::class);
+        return $this->belongsToMany(Player::class, 'game_players')
+                    ->withPivot('role', 'is_creator');
     }
+    
+    
 }

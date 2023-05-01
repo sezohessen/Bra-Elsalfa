@@ -34,8 +34,5 @@ class GamePlayer extends Model
         'is_creator' => 'boolean',
     ];
 
-    public function playersGames(): BelongsTo
-    {
-        return $this->belongsTo(PlayersGames::class);
-    }
+
 }
