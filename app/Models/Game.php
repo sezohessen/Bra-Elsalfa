@@ -32,7 +32,7 @@ class Game extends Model
 
     public function gameTheme()
     {
-        return $this->belongsTo(GameTheme::class);
+        return $this->belongsTo(GameTheme::class,'game_theme_id');
     }
 
     public function gameAnswer()

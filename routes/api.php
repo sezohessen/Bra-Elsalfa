@@ -23,9 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/test', function () {
-    $test = Game::find('a5d16266-59ef-4cd6-8ec4-d51cd7cba76d');
+    $test = Player::find('3b4f7acb-49c9-4752-88da-90a6fdafff34');
 
-    return $test->gameAnswer->theme;
+    return $test->games->first()->gameAnswer;
 });
 
 // Start
