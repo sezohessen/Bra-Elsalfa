@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(GameThemeSeeder::class);
         $this->call(ThemeObjectSeeder::class);
-        GamePlayer::factory()->count(10)->create();   
+        $this->call(GamePlayerSeeder::class);
+ 
     }
 }

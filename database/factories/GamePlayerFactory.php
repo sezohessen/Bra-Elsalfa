@@ -20,18 +20,9 @@ class GamePlayerFactory extends Factory
     /**
      * Define the model's default state.
      */
-    public function definition(): array
+    public function definition()
     {
-        $game = Game::factory()->create();
-        $player = Player::factory()->create();
 
-        return [
-            'id' => Str::uuid(),
-            'game_id' => $game->id,
-            'player_id' => $player->id,
-            'role' => $this->faker->word,
-            'is_creator' => $this->faker->boolean,
-        ];
     }
     
 }

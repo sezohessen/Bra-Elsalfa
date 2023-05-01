@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id');
             $table->string('game_id');
             $table->string('player_id');
-            $table->string('role');
+            $table->enum('role',['normal','outcast'])->nullable();
             $table->boolean('is_creator');
             $table->timestamps();
         });

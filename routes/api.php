@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\v1\PlayersController;
 use App\Models\Game;
 use App\Models\Player;
 use Illuminate\Http\Request;
@@ -26,3 +27,6 @@ Route::get('/test', function () {
 
     return $test->gameAnswer->theme;
 });
+
+// Start
+Route::apiResource('/players',PlayersController::class);
