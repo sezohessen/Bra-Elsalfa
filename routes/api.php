@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Game;
 use App\Models\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/test', function () {
-    $player = Player::find('2d427fe7-4336-49ee-a116-745591fcccde');
-    return $player->games;
+    $test = Game::find('a5d16266-59ef-4cd6-8ec4-d51cd7cba76d');
+
+    return $test->gameAnswer->theme;
 });

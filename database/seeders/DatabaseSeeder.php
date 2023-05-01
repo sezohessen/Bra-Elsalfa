@@ -18,9 +18,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Animal::factory()->count(10)->create();   
-        Country::factory()->count(10)->create();   
-        GameTheme::factory()->count(10)->create();   
+        $this->call(GameThemeSeeder::class);
+        $this->call(ThemeObjectSeeder::class);
         GamePlayer::factory()->count(10)->create();   
     }
 }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('game_theme');
-            $table->string('game_answer');
+            $table->string('game_theme_id');
+            $table->string('game_answer_id');
             $table->integer('current_round');
             $table->timestamps();
         });
