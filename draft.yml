@@ -30,10 +30,6 @@ models:
     - game_id: uuid(foreign:games.id)
     - voter_id: uuid(foreign:players.id)
     - voted_id: uuid(foreign:players.id)
-    - relationships:
-        belongsTo:
-          - players: [voter_id, voted_id]
-          - games: game_id
 
   GameTheme:
     - id: uuid
