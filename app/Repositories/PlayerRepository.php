@@ -17,7 +17,11 @@ class PlayerRepository implements RepositoryInterface
 
     public function getOne($id)
     {
-        return Player::findOrFail($id);
+        $player =  Player::find($id);
+        if ($player) {
+            return $player;
+        }
+        return false;
     }
 
     public function create(array $data)
@@ -30,19 +34,22 @@ class PlayerRepository implements RepositoryInterface
 
     public function update($id, array $data)
     {
-        $player = Player::findOrFail($id);
-        $player->fill($data);
-        $player->save();
-
-        return $player;
+        $player =  Player::find($id);
+        if ($player) {
+            $player->fill($data);
+            $player->save();
+            return $player;
+        }
+        return false;
     }
 
     public function delete($id)
     {
-        $player = Player::findOrFail($id);
-        if (!$player) {
+        $player =  Player::find($id);
+        if ($player) {
+            $player->delete();
+        } else {
             return false;
         }
-        $player->delete();
     }
 }

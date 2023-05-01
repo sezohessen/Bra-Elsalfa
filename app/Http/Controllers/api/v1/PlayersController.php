@@ -6,6 +6,7 @@ use App\Models\Game;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\RequireGame;
 use App\Http\Requests\Player\CreatePlayerRequest;
+use App\Http\Requests\Player\RequirePlayer;
 use App\Http\Requests\Player\UpdatePlayerRequest;
 use App\Repositories\PlayerRepository;
 
@@ -23,11 +24,10 @@ class PlayersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(RequireGame $require)
+    public function index()
     {
-        $game = Game::findOrFail($require->game);
 
-        $players = $this->playerRepository->getAll($game);
+        $players = $this->playerRepository->getAll();
 
         return response()->json($players);
     }
@@ -54,8 +54,10 @@ class PlayersController extends Controller
     public function show($id)
     {
         $player = $this->playerRepository->getOne($id);
-
-        return response()->json($player);
+        if ($player) {
+            return response()->json($player);
+        }
+        return response()->json(['message' => 'not found']);
     }
 
     /**
@@ -67,11 +69,12 @@ class PlayersController extends Controller
      */
     public function update(UpdatePlayerRequest $request, $id)
     {
-        $this->playerRepository->update($id, ['name' => $request->name]);
-
         $player = $this->playerRepository->getOne($id);
-
-        return response()->json($player);
+        if ($player) {
+            $this->playerRepository->update($id, ['name' => $request->name]);
+            return response()->json($player);
+        }
+        return response()->json(['message' => 'not found']);
     }
 
     /**
@@ -82,8 +85,10 @@ class PlayersController extends Controller
      */
     public function destroy($id)
     {
-        $this->playerRepository->delete($id);
-
-        return response()->json(null, 204);
+        $player = $this->playerRepository->delete($id);
+        if ($player) {
+            return response()->json(null, 204);
+        }
+        return response()->json(['message' => 'not found']);
     }
 }
