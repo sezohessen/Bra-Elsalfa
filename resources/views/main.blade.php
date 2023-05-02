@@ -4,7 +4,7 @@
     <nav class="navbar">
         <div class="navbar-brand">
             <a class="navbar-item" href="#">
-                Guess Who
+                Guess who
             </a>
         </div>
         <div class="play-button">
