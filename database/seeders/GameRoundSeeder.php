@@ -13,6 +13,6 @@ class GameRoundSeeder extends Seeder
      */
     public function run(): void
     {
-        Round::factory()->count(10)->create();
+        Round::factory()->count(2)->create();
     }
 }

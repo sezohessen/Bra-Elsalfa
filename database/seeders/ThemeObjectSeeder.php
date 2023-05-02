@@ -26,7 +26,6 @@ class ThemeObjectSeeder extends Seeder
 
             foreach ($themeObjects as $object) {
                 ThemeObject::create([
-                    "id" => Str::uuid(),
                     "name" => $object,
                     "game_theme_id" => $theme->id
                 ]);

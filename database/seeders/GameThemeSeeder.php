@@ -18,7 +18,6 @@ class GameThemeSeeder extends Seeder
 
         foreach ($themes as $theme) {
             GameTheme::create([
-                "id" => Str::uuid(),
                 "name" => $theme
             ]);
         }

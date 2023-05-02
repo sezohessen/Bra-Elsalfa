@@ -38,24 +38,16 @@ class Game extends Model
     ];
 
 
-    public function addPlayer(Player $player, $isCreator = false)
+    public function chooseRandomAnswer()
     {
-        $gamePlayerData = [
-            $player->id => [
-                'id'         => Str::uuid()->toString(),
-                'is_creator' => $isCreator,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ];
-
-        $this->players()->syncWithoutDetaching($gamePlayerData);
+        $themeObjects = $this->gameThemeAnswers;
+        return $themeObjects->random();
     }
 
     public function players()
     {
         return $this->belongsToMany(Player::class, 'game_players')
-            ->withPivot('role', 'is_creator');
+            ->withPivot('is_creator');
     }
 
     public function gameTheme()
@@ -63,13 +55,20 @@ class Game extends Model
         return $this->belongsTo(GameTheme::class, 'game_theme_id');
     }
 
-    public function gameAnswer()
+    public function gameThemeAnswers()
     {
-        return $this->belongsTo(ThemeObject::class, 'game_answer_id');
+        return $this->hasManyThrough(
+            ThemeObject::class,
+            GameTheme::class,
+            'id', // Foreign key on GameTheme table...
+            'game_theme_id', // Foreign key on ThemeObject table...
+            'game_theme_id', // Local key on Game table...
+            'id' // Local key on GameTheme table...
+        );
     }
 
     public function rounds()
     {
-        return $this->hasMany(Round::class);
+        return $this->hasMany(Round::class, 'game_id');
     }
 }

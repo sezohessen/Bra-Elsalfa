@@ -25,7 +25,7 @@ class GameTheme extends Model
 
     public function themeObjects()
     {
-        return $this->hasMany(ThemeObject::class);
+        return $this->belongsTo(ThemeObject::class,'game_theme_id');
     }
 
 }

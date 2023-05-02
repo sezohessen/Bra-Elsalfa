@@ -22,12 +22,11 @@ class GameFactory extends Factory
      */
     public function definition(): array
     {
-        $themes     = GameTheme::all();
-        foreach ($themes as $theme) {
-            return [
-                'id' => Str::uuid(),
-                'game_theme_id' => $theme->id,
-            ];
-        }
+
+        $gameThemeId = $this->faker->randomElement(GameTheme::pluck('id')->toArray());
+        return [
+            'id' => Str::uuid(),
+            'game_theme_id' => $gameThemeId,
+        ];
     }
 }

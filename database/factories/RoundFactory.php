@@ -23,29 +23,23 @@ class RoundFactory extends Factory
      */
     public function definition(): array
     {
-        $game = Game::inRandomOrder()->first();
-    
-        // Get the current round number for the game
-        $roundNumber = Round::where('game_id', $game->id)->max('round_number') + 1;
+        $game = Game::with('gameTheme.themeObjects', 'players')->inRandomOrder()->first();
         
+        $lastRound = $game->rounds()->orderByDesc('round_number')->first();
+        $roundNumber = $lastRound ? $lastRound->round_number + 1 : 1;
+    
         // Get a random game answer ID for the current round
-        $gameAnswerId = ThemeObject::inRandomOrder()
-            ->where('game_theme_id', $game->game_theme_id)
-            ->first()
-            ->id;
-        
-        // Get a random outcast ID for the current round
-        $outcastId = GamePlayer::inRandomOrder()
-            ->where('game_id', $game->id)
-            ->where('role', 'outcast')
-            ->first()
-            ->id;
-    
+        $gameAnswerId = $game->chooseRandomAnswer()->id;
+
+        // Get a random outcast id from the player ids array
+
+        $outcastId = $game->players->random()->id;
+
         return [
             'game_id'           => $game->id,
             'round_number'      => $roundNumber,
             'game_answer_id'    => $gameAnswerId,
-            'outcast_id'        => $outcastId,
+            'outcast_id'        => $outcastId,  
         ];
     }
 }

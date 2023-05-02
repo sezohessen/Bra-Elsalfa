@@ -22,7 +22,22 @@ class GamePlayerFactory extends Factory
      */
     public function definition()
     {
+        $game   = Game::factory()->create();
+        $player = Player::factory()->create();
+        return [
+            'game_id'    => $game->id,
+            'player_id'  => $player->id,
+            'is_creator' => false,
+        ];
+    }
 
+    public function outcast()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_outcast' => true,
+            ];
+        });
     }
     
 }
