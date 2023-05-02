@@ -11,10 +11,6 @@ class GamePlayer extends Model
 {
     use HasFactory;
 
-    protected $keyType = 'string';
-    public $incrementing = false;
-
-
     /**
      * The attributes that are mass assignable.
      *
@@ -23,7 +19,6 @@ class GamePlayer extends Model
     protected $fillable = [
         'game_id',
         'player_id',
-        'role',
         'is_creator',
     ];
 

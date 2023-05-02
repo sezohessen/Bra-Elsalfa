@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('game_players', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->string('game_id');
             $table->string('player_id');
-            $table->enum('role',['normal','outcast'])->nullable();
             $table->boolean('is_creator');
             $table->timestamps();
         });

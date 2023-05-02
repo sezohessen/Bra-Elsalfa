@@ -24,12 +24,9 @@ class GameFactory extends Factory
     {
         $themes     = GameTheme::all();
         foreach ($themes as $theme) {
-            $themeObject = ThemeObject::where('game_theme_id', $theme->id)->inRandomOrder()->first();
             return [
                 'id' => Str::uuid(),
                 'game_theme_id' => $theme->id,
-                'game_answer_id' => $themeObject->id,
-                'current_round' => $this->faker->numberBetween(1, 10),
             ];
         }
     }

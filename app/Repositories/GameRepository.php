@@ -22,12 +22,9 @@ class GameRepository implements RepositoryInterface
     public function create($gameThemeId): Game
     {
         $gameTheme = GameTheme::with('themeObjects')->findOrFail($gameThemeId);
-        $gameAnswer = $gameTheme->themeObjects->random();
 
         $game = new Game([
             'game_theme_id' => $gameTheme->id,
-            'game_answer_id' => $gameAnswer->id,
-            'current_round' => 1,
         ]);
         $game->save();
 

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('theme_objects', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->string('name');
             $table->string('game_theme_id');
             $table->timestamps();

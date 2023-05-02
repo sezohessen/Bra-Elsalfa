@@ -21,10 +21,7 @@ class GameVoteFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => Str::uuid(),
-            'game_id' => $this->faker->word,
-            'voter_id' => $this->faker->word,
-            'voted_id' => $this->faker->word,
+
         ];
     }
 }

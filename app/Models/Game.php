@@ -14,7 +14,7 @@ class Game extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-     /**
+    /**
      * The "booting" method of the model.
      *
      * @return void
@@ -27,7 +27,7 @@ class Game extends Model
             $model->id = Str::uuid()->toString();
         });
     }
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -35,8 +35,6 @@ class Game extends Model
      */
     protected $fillable = [
         'game_theme_id',
-        'game_answer_id',
-        'current_round',
     ];
 
 
@@ -62,11 +60,16 @@ class Game extends Model
 
     public function gameTheme()
     {
-        return $this->belongsTo(GameTheme::class,'game_theme_id');
+        return $this->belongsTo(GameTheme::class, 'game_theme_id');
     }
 
     public function gameAnswer()
     {
         return $this->belongsTo(ThemeObject::class, 'game_answer_id');
+    }
+
+    public function rounds()
+    {
+        return $this->hasMany(Round::class);
     }
 }

@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GameThemeSeeder::class);
         $this->call(ThemeObjectSeeder::class);
         $this->call(GamePlayerSeeder::class);
- 
+        $this->call(GameRoundSeeder::class);
     }
 }

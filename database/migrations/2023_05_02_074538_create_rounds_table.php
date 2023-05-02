@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('games', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->string('game_theme_id');
-            $table->enum('status',['waiting','playing','finished'])->default('waiting');
+        Schema::create('rounds', function (Blueprint $table) {
+            $table->id();
+            $table->string('game_id');
+            $table->string('outcast_id');
+            $table->string('game_answer_id');
+            $table->integer('round_number');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('rounds');
     }
 };

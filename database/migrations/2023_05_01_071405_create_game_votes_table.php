@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('game_votes', function (Blueprint $table) {
-            $table->string('id');
+            $table->id();
             $table->string('game_id');
+            $table->string('game_round_id');
             $table->string('voter_id');
             $table->string('voted_id');
+            $table->boolean('isCorrect')->nullable();
             $table->timestamps();
         });
     }
