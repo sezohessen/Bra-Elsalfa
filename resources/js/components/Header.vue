@@ -2,8 +2,8 @@
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-import NamePopup from "@/components/NamePopup.vue";
-import { createRoom } from '../utils/createGame';
+import CreateGame from "@/components/CreateGame.vue";
+import createRoom from '../utils/createGame';
 
 
 export default {
@@ -18,30 +18,35 @@ export default {
         },
     },
     setup() {
-        const showNamePopup = ref(false);
+        const showCreateGameModel = ref(false);
         const route = useRoute();
         const isHomePage = computed(() => {
             return route.path === '/';
         });
 
-
         function showPopup() {
-            showNamePopup.value = true;
+            showCreateGameModel.value = true;
         }
 
-        function onSubmitName(creatorName) {
-            createRoom(creatorName);
+        function onSubmitName(creatorName,gameThemeID) {
+            createRoom(creatorName, gameThemeID);
+        }
+
+        function closeModel()
+        {
+            showCreateGameModel.value = false;
         }
 
         return {
             showPopup,
+            closeModel,
             onSubmitName,
-            showNamePopup,
+            showCreateGameModel,
             isHomePage
         };
     },
     components: {
-        NamePopup,
+        CreateGame,
     },
 }
 </script>
@@ -56,7 +61,11 @@ export default {
         <div class="header-right" v-if="isHomePage">
             <button class="create-button" @click="showPopup">Create Room</button>
         </div>
-        <NamePopup v-if="showNamePopup" @submit-name="onSubmitName" :creatorName="creatorName"/>
+        <CreateGame v-if="showCreateGameModel" 
+        @create-game="onSubmitName" 
+        @close-model="closeModel"
+        :creatorName="creatorName" 
+        :gameThemeID="gameThemeID" />
     </header>
 </template>
   

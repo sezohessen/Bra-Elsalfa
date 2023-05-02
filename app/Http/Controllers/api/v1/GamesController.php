@@ -39,7 +39,7 @@ class GamesController extends Controller
 
     public function store(StoreGameRequest $request)
     {
-    $ip_address = $request->player_ip;
+        $ip_address = $request->player_ip;
         $player     = Player::where('ip_address', $ip_address)->first();
         if (!$player) {
             $faker = Factory::create();
@@ -52,8 +52,7 @@ class GamesController extends Controller
         }
 
         $game   = $this->gameRepository->create($request->game_theme_id);
-        $game->addPlayer($player, true);
-
+        $game->players()->attach($player->id, ['is_creator' => true]);
 
         return response()->json([
             'game'        => $game,

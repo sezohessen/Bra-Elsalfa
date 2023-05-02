@@ -1,23 +1,20 @@
 import getIP from './getIP.js';
-import { get, post, put, remove } from './api.js';
+import { post } from '../api/api.js';
 
-const createRoom = async (name) => {
+const createGame = async (name, gameThemeId) => {
   const creatorIP = await getIP();
+  const response = await post('games', {
+    player_ip: creatorIP,
+    name: name,
+    game_theme_id: gameThemeId,
+  });
 
-  const data = {
-    creatorIP,
-    players: [
-      {
-        guestName: name,
-        guestIP: creatorIP,
-      },
-    ],
-  };
+  const { game, player } = response;
 
-  const response = await post('/games', data);
+  sessionStorage.setItem('player', player);
 
-  const { gameID } = response;
-
-  window.location.href = `/lobby/${gameID}`;
+  window.location.href = `/lobby/${game.id}`;
 };
-export default createRoom;
+
+export default createGame;
+

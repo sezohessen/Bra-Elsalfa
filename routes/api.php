@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\v1\GamesController;
+use App\Http\Controllers\api\v1\GameThemesController;
 use App\Http\Controllers\api\v1\PlayersController;
 use App\Models\Game;
 use App\Models\Player;
@@ -32,3 +33,4 @@ Route::get('/test', function () {
 // Start
 Route::apiResource('/players',PlayersController::class);
 Route::apiResource('/games',GamesController::class);
+Route::apiResource('/game-themes',GameThemesController::class);
