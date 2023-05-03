@@ -19,12 +19,13 @@ export default {
     }
   },
   methods: {
-    async submitNameAndGameTheme() {
+    async create() {
       if (!this.selectedGameThemeId) {
         alert("Please select a game theme");
         return;
       }
-      await createRoom(this.creatorName, this.selectedGameThemeId);
+      const playerIP = localStorage.getItem('playerIP');
+      await createRoom(this.creatorName, this.selectedGameThemeId, playerIP);
     },
 
     closePopup() {
@@ -45,7 +46,7 @@ export default {
       <div class="row justify-content-center">
         <div class="blog-post-wrapper">
           <div class="tournament__details-content">
-          <div class="close-icon" @click="closePopup">&#10006;</div>
+            <div class="close-icon" @click="closePopup">&#10006;</div>
             <h1 style="text-align: center;" class="title">Create Room</h1>
             <div class="tournament__details-form">
               <section class="team__area team-bg text" data-background="assets/img/bg/team_bg.jpg"
@@ -78,7 +79,7 @@ export default {
                     </div>
                   </div>
                 </div>
-                <button @click="submitNameAndGameTheme" class="tournament__details-form-btn">Create Room</button>
+                <button @click="create" class="tournament__details-form-btn">Create Room</button>
               </section>
             </div>
           </div>
@@ -90,13 +91,15 @@ export default {
 </template>
 
 <style scoped>
-.tournament__details-area{
+.tournament__details-area {
   margin-top: 4rem;
 }
-.close-icon{
+
+.close-icon {
   cursor: pointer;
 }
-.selected{
+
+.selected {
   background-color: #4ebd92;
 }
 </style>

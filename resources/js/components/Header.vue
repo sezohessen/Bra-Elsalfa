@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import CreateGame from "@/components/CreateGame.vue";
+import Logo from "@/components/Logo.vue";
+
 
 
 export default {
@@ -40,6 +42,7 @@ export default {
     },
     components: {
         CreateGame,
+        Logo
     },
 }
 </script>
@@ -53,9 +56,7 @@ export default {
                         <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
                         <div class="tgmenu__wrap">
                             <nav class="tgmenu__nav">
-                                <div class="logo">
-                                    <a href="index-2.html"><img :src="`images/logo2.png`" alt="Logo"></a>
-                                </div>
+                                <Logo />
                                 <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                     <ul class="navigation">
                                         <li class="active menu-item-has-children"><a href="#">
@@ -111,9 +112,6 @@ export default {
         <div class="offCanvas__wrap">
             <div class="offCanvas__body">
                 <div class="offCanvas__top">
-                    <div class="offCanvas__logo logo">
-                        <a href="index-2.html"><img src="assets/img/logo/logo.png" alt="Logo"></a>
-                    </div>
                     <div class="offCanvas__toggle">
                         <i class="flaticon-swords-in-cross-arrangement"></i>
                     </div>
