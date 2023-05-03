@@ -5,48 +5,35 @@ export default {
 </script>
 
 <template>
-  <div class="welcome-page">
-    <div class="left">
-      <h1>Outcast</h1>
-      <p>Join the world of online gaming and compete against players from all over the world. We offer a variety of games for players of all ages and skill levels.</p>
+  <section class="slider__area slider__bg" data-background="assets/img/slider/slider_bg.jpg">
+    <div class="slider-activee">
+        <div class="single-slider">
+            <div class="container custom-container">
+                <div class="row justify-content-between">
+                    <div class="col-lg-6">
+                        <div class="slider__content">
+                            <h6 class="sub-title wow fadeInUp" data-wow-delay=".2s">live rooms</h6>
+                            <h2 class="title wow fadeInUp" data-wow-delay=".5s">who is the outcast</h2>
+                            <p class="wow fadeInUp" data-wow-delay=".8s">Play with friends</p>
+                            <div class="slider__btn wow fadeInUp" data-wow-delay="1.2s">
+                                <a href="contact.html" class="tg-btn-1"><span>Play Now</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-5 col-lg-6">
+                        <div class="slider__img text-center">
+                            <img :src="`images/avatar.avif`" data-magnetic alt="img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="right">
-      <img src="https://images.pexels.com/photos/5427445/pexels-photo-5427445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Welcome Page Image">
+    <div class="slider__shapes">
+        <img :src="`images/profile/nft_avatar.png`" alt="shape">
+        <img :src="`images/profile/nft_avatar01.png`" alt="shape">
+        <img :src="`images/profile/nft_avatar02.png`" alt="shape">
+        <img :src="`images/profile/nft_avatar03.png`" alt="shape">
     </div>
-  </div>
+</section>
 </template>
-
-<style scoped>
-.welcome-page {
-  background-color: #003844;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 100px;
-  margin-top: 2rem;
-}
-
-.left {
-  color: #FFEBC6;
-  flex-basis: 50%;
-}
-
-.left h1 {
-  font-size: 48px;
-  margin-bottom: 30px;
-}
-
-.left p {
-  font-size: 24px;
-  margin-bottom: 30px;
-}
-
-.right img {
-  width: 100%;
-  height: auto;
-  border: 1px solid #FFEBC6;
-  border-radius: 2rem;
-}
-</style>

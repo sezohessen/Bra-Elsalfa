@@ -35,7 +35,7 @@ export default {
             showPopup,
             closeModel,
             showCreateGameModel,
-            isHomePage
+            isHomePage,
         };
     },
     components: {
@@ -46,67 +46,114 @@ export default {
 
 <template>
     <header>
-        <div class="header">
-            <div class="header-left">
-                <router-link :to="{ name: 'home' }">
-                    <h1 class="header-title">{{ headerTitle }}</h1>
-                </router-link>
+        <div id="sticky-header" class="tg-header__area transparent-header">
+            <div class="container custom-container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                        <div class="tgmenu__wrap">
+                            <nav class="tgmenu__nav">
+                                <div class="logo">
+                                    <a href="index-2.html"><img :src="`images/logo2.png`" alt="Logo"></a>
+                                </div>
+                                <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
+                                    <ul class="navigation">
+                                        <li class="active menu-item-has-children"><a href="#">
+                                            <router-link :to="{ name: 'home' }">
+                                                {{ headerTitle }}
+                                            </router-link>
+                                        </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="tgmenu__action d-none d-md-block">
+                                    <ul class="list-wrap">
+                                        <li class="header-btn">
+                                            <a href="#"  @click="showPopup" class="tg-border-btn">
+                                                <i class="fa-sharp fa-solid fa-star"></i> Play
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="header-right" v-if="isHomePage">
-                <button class="btn" @click="showPopup">Create Room</button>
-            </div>
-            <CreateGame v-if="showCreateGameModel" @close-model="closeModel" />
         </div>
+
+        <!-- header-search -->
+        <div class="search__popup-wrap">
+            <div class="search__layer"></div>
+            <div class="search__close">
+                <span><i class="flaticon-swords-in-cross-arrangement"></i></span>
+            </div>
+            <div class="search__wrap text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="title">... <span>Search Here</span> ...</h2>
+                            <div class="search__form">
+                                <form action="#">
+                                    <input type="text" name="search" placeholder="Type keywords here" required>
+                                    <button class="search-btn"><i class="flaticon-loupe"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header-search-end -->
+
+        <!-- offCanvas-area -->
+        <div class="offCanvas__wrap">
+            <div class="offCanvas__body">
+                <div class="offCanvas__top">
+                    <div class="offCanvas__logo logo">
+                        <a href="index-2.html"><img src="assets/img/logo/logo.png" alt="Logo"></a>
+                    </div>
+                    <div class="offCanvas__toggle">
+                        <i class="flaticon-swords-in-cross-arrangement"></i>
+                    </div>
+                </div>
+                <div class="offCanvas__content">
+                    <h2 class="title">Best Seller of Month Ideas for <span>NFT Wallet</span></h2>
+                    <div class="offCanvas__contact">
+                        <h4 class="small-title">CONTACT US</h4>
+                        <ul class="offCanvas__contact-list list-wrap">
+                            <li><a href="tel:93332225557">+9 333 222 5557</a></li>
+                            <li><a href="mailto:info@webmail.com">info@webmail.com</a></li>
+                            <li>New Central Park W7 Street ,New York</li>
+                        </ul>
+                    </div>
+                    <div class="offCanvas__newsletter">
+                        <h4 class="small-title">Subscribe</h4>
+                        <form action="#" class="offCanvas__newsletter-form">
+                            <input type="email" placeholder="Get News & Updates">
+                            <button type="submit"><i class="flaticon-send"></i></button>
+                        </form>
+                        <p>Subscribe dolor sitamet, consectetur adiping eli. Duis esollici tudin augue.</p>
+                    </div>
+                    <ul class="offCanvas__social list-wrap">
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+                <div class="offCanvas__copyright">
+                    <p>Copyright © 2023 - By <span>MYKD</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="offCanvas__overlay"></div>
+        <CreateGame v-if="showCreateGameModel" @close-model="closeModel" />
+
+
     </header>
 </template>
   
 
 
-<style scoped>
-
-a, a:focus,a:active {
-    color: #FFEBC6;
-    text-decoration: none;
-}
-.header {
-    background-color: #003844;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px 100px;
-}
-
-.logo h1 {
-    color: #FFEBC6;
-    font-size: 40px;
-    margin: 0;
-}
-
-nav {
-    display: flex;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-}
-
-nav li {
-    margin-left: 30px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #FFEBC6;
-    font-size: 24px;
-    font-weight: bold;
-    border-bottom: 2px solid transparent;
-    transition: border-bottom-color 0.3s;
-}
-
-nav a:hover {
-    border-bottom-color: #FFEBC6;
-}
-</style>
