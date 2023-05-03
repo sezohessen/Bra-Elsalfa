@@ -66,7 +66,7 @@ export default {
                       @click="selectGameTheme(theme.id)">
                       <div class="team__item">
                         <div class="team__thumb">
-                          <a href="team-details.html"><img :src="`images/profile/nft_img0${index + 1}.jpg`" alt="img"></a>
+                          <img :src="`images/profile/nft_img0${index + 1}.jpg`" alt="img">
                         </div>
                         <div class="team__content">
                           <h4 class="name">
@@ -95,5 +95,8 @@ export default {
 }
 .close-icon{
   cursor: pointer;
+}
+.selected{
+  background-color: #4ebd92;
 }
 </style>
