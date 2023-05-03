@@ -1,54 +1,52 @@
-<template>
-  <div class="container">
-    <div class="welcome-message">
-      <h1>Welcome to Guess Who</h1>
-      <p>
-        This is a fun game where you have to guess the person based on a
-        series of yes-or-no questions. Think you can do it?
-      </p>
-    </div>
-    <div class="about-us">
-      <h2>About Us</h2>
-      <p>
-        We are a team of developers who love to create fun and engaging games
-        for people of all ages. Our goal is to make gaming more accessible and
-        enjoyable for everyone. Thanks for playing!
-      </p>
-    </div>
-  </div>
-</template>
-
 <script>
-
 export default {
   name: "WelcomePage",
 };
 </script>
 
+<template>
+  <div class="welcome-page">
+    <div class="left">
+      <h1>Outcast</h1>
+      <p>Join the world of online gaming and compete against players from all over the world. We offer a variety of games for players of all ages and skill levels.</p>
+    </div>
+    <div class="right">
+      <img src="https://images.pexels.com/photos/5427445/pexels-photo-5427445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Welcome Page Image">
+    </div>
+  </div>
+</template>
+
 <style scoped>
-.container {
+.welcome-page {
+  background-color: #003844;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px;
+  margin-top: 2rem;
 }
 
-.welcome-message {
-  margin-top: 50px;
-  text-align: center;
+.left {
+  color: #FFEBC6;
+  flex-basis: 50%;
 }
 
-.about-us {
-  margin-top: 50px;
-  text-align: center;
+.left h1 {
+  font-size: 48px;
+  margin-bottom: 30px;
 }
 
-.about-us h2 {
+.left p {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-.about-us p {
-  font-size: 18px;
-  line-height: 1.5;
+.right img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #FFEBC6;
+  border-radius: 2rem;
 }
 </style>

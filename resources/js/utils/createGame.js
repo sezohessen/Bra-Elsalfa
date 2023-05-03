@@ -3,6 +3,7 @@ import { post } from '../api/api.js';
 
 const createGame = async (name, gameThemeId) => {
   const creatorIP = await getIP();
+    console.log(name,gameThemeId)
   const response = await post('games', {
     player_ip: creatorIP,
     name: name,

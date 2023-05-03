@@ -1,5 +1,6 @@
 <script>
 import { get } from '../api/api.js';
+import createRoom from '../utils/createGame';
 
 export default {
   data() {
@@ -18,12 +19,12 @@ export default {
     }
   },
   methods: {
-    submitNameAndGameTheme() {
+    async submitNameAndGameTheme() {
       if (!this.selectedGameThemeId) {
         alert("Please select a game theme");
         return;
       }
-      this.$emit("create-game", this.creatorName, this.selectedGameThemeId);
+      await createRoom(this.creatorName, this.selectedGameThemeId);
     },
     closePopup() {
       this.$emit("close-model");

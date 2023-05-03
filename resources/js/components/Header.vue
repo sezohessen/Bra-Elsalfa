@@ -1,16 +1,14 @@
 <script>
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
-
 import CreateGame from "@/components/CreateGame.vue";
-import createRoom from '../utils/createGame';
 
 
 export default {
     props: {
         headerTitle: {
             type: String,
-            default: 'Game Who',
+            default: 'The Outcast',
         },
         showCreateButton: {
             type: Boolean,
@@ -18,8 +16,9 @@ export default {
         },
     },
     setup() {
-        const showCreateGameModel = ref(false);
         const route = useRoute();
+
+        const showCreateGameModel = ref(false);
         const isHomePage = computed(() => {
             return route.path === '/';
         });
@@ -28,19 +27,13 @@ export default {
             showCreateGameModel.value = true;
         }
 
-        function onSubmitName(creatorName,gameThemeID) {
-            createRoom(creatorName, gameThemeID);
-        }
-
-        function closeModel()
-        {
+        function closeModel() {
             showCreateGameModel.value = false;
         }
 
         return {
             showPopup,
             closeModel,
-            onSubmitName,
             showCreateGameModel,
             isHomePage
         };
@@ -52,66 +45,68 @@ export default {
 </script>
 
 <template>
-    <header class="header">
-        <div class="header-left">
-            <router-link :to="{ name: 'home' }">
-                <h1 class="header-title">{{ headerTitle }}</h1>
-            </router-link>
+    <header>
+        <div class="header">
+            <div class="header-left">
+                <router-link :to="{ name: 'home' }">
+                    <h1 class="header-title">{{ headerTitle }}</h1>
+                </router-link>
+            </div>
+            <div class="header-right" v-if="isHomePage">
+                <button class="btn" @click="showPopup">Create Room</button>
+            </div>
+            <CreateGame v-if="showCreateGameModel" @close-model="closeModel" />
         </div>
-        <div class="header-right" v-if="isHomePage">
-            <button class="create-button" @click="showPopup">Create Room</button>
-        </div>
-        <CreateGame v-if="showCreateGameModel" 
-        @create-game="onSubmitName" 
-        @close-model="closeModel"
-        :creatorName="creatorName" 
-        :gameThemeID="gameThemeID" />
     </header>
 </template>
   
+
+
 <style scoped>
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #222;
-    color: #fff;
-    padding: 1rem;
-}
 
-.header-left {
-    display: flex;
-    align-items: center;
-}
-
-.header-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
-    color: #ff9900;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-}
-
-.create-button {
-    font-family: 'Lato', sans-serif;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: #ff9900;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
+a, a:focus,a:active {
+    color: #FFEBC6;
     text-decoration: none;
-    transition: background-color 0.2s ease-in-out;
+}
+.header {
+    background-color: #003844;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 100px;
 }
 
-.create-button:hover {
-    background-color: #e68a00;
+.logo h1 {
+    color: #FFEBC6;
+    font-size: 40px;
+    margin: 0;
+}
+
+nav {
+    display: flex;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav li {
+    margin-left: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #FFEBC6;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color 0.3s;
+}
+
+nav a:hover {
+    border-bottom-color: #FFEBC6;
 }
 </style>
-  
