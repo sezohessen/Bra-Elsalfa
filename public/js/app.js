@@ -17939,7 +17939,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       creatorName: "",
       selectedGameThemeId: "",
-      gameThemes: []
+      gameThemes: [],
+      loading: true
     };
   },
   mounted: function mounted() {
@@ -17962,10 +17963,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             _context.t0 = _context["catch"](0);
             console.error(_context.t0);
           case 10:
+            _context.prev = 10;
+            _this.loading = false;
+            return _context.finish(10);
+          case 13:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 7]]);
+      }, _callee, null, [[0, 7, 10, 13]]);
     }))();
   },
   methods: {
@@ -17976,17 +17981,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              if (_this2.selectedGameThemeId) {
-                _context2.next = 3;
-                break;
+              if (!_this2.selectedGameThemeId) {
+                _this2.selectedGameThemeId = _this2.gameThemes[0];
               }
-              alert("Please select a game theme");
-              return _context2.abrupt("return");
-            case 3:
               playerIP = localStorage.getItem('playerIP');
-              _context2.next = 6;
+              _context2.next = 4;
               return (0,_utils_createGame__WEBPACK_IMPORTED_MODULE_1__["default"])(_this2.creatorName, _this2.selectedGameThemeId, playerIP);
-            case 6:
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -18190,23 +18191,28 @@ var _hoisted_9 = {
 };
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row justify-content-center\" data-v-592bf8b9><div class=\"col-xl-6 col-lg-7 col-md-10\" data-v-592bf8b9><div class=\"section__title text-center\" data-v-592bf8b9><span class=\"sub-title tg__animate-text\" data-v-592bf8b9>Game Theme</span><h5 class=\"title\" data-v-592bf8b9>CHOOSE A GAME THEME</h5></div></div></div>", 1);
 var _hoisted_11 = {
+  key: 0,
+  "class": "loading-section"
+};
+var _hoisted_12 = {
+  key: 1,
   "class": "row justify-content-center"
 };
-var _hoisted_12 = ["onClick"];
-var _hoisted_13 = {
+var _hoisted_13 = ["onClick"];
+var _hoisted_14 = {
   "class": "team__item"
 };
-var _hoisted_14 = {
+var _hoisted_15 = {
   "class": "team__thumb"
 };
-var _hoisted_15 = ["src"];
-var _hoisted_16 = {
+var _hoisted_16 = ["src"];
+var _hoisted_17 = {
   "class": "team__content"
 };
-var _hoisted_17 = {
+var _hoisted_18 = {
   "class": "name"
 };
-var _hoisted_18 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "designation"
   }, "Free", -1 /* HOISTED */);
@@ -18224,21 +18230,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     type: "text",
     placeholder: "Type your name"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.creatorName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.gameThemes, function (theme, index) {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.creatorName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, $data.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, " Loading... ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.gameThemes, function (theme, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-lg-4 col-sm-6 wow fadeInUp", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-lg-4 col-sm-6 wow fadeInUp", [{
         'selected': $data.selectedGameThemeId === theme.id
-      }]),
+      }, {
+        'selected': index === 0 && !$data.selectedGameThemeId
+      }]]),
       "data-wow-delay": ".2s",
       key: theme.id,
       onClick: function onClick($event) {
         return $options.selectGameTheme(theme.id);
       }
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: "images/profile/nft_img0".concat(index + 1, ".jpg"),
       alt: "img"
-    }, null, 8 /* PROPS */, _hoisted_15)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(theme.name), 1 /* TEXT */), _hoisted_18])])], 10 /* CLASS, PROPS */, _hoisted_12);
-  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }, null, 8 /* PROPS */, _hoisted_16)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(theme.name), 1 /* TEXT */), _hoisted_19])])], 10 /* CLASS, PROPS */, _hoisted_13);
+  }), 128 /* KEYED_FRAGMENT */))]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.create && $options.create.apply($options, arguments);
     }),

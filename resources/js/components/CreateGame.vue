@@ -8,6 +8,7 @@ export default {
       creatorName: "",
       selectedGameThemeId: "",
       gameThemes: [],
+      loading: true,
     };
   },
   async mounted() {
@@ -16,13 +17,14 @@ export default {
       this.gameThemes = response;
     } catch (error) {
       console.error(error);
+    } finally {
+      this.loading = false;
     }
   },
   methods: {
     async create() {
       if (!this.selectedGameThemeId) {
-        alert("Please select a game theme");
-        return;
+        this.selectedGameThemeId = this.gameThemes[0]
       }
       const playerIP = localStorage.getItem('playerIP');
       await createRoom(this.creatorName, this.selectedGameThemeId, playerIP);
@@ -61,9 +63,13 @@ export default {
                       </div>
                     </div>
                   </div>
-                  <div class="row justify-content-center">
+                  <div v-if="loading" class="loading-section">
+                    Loading...
+                  </div>
+                  <div v-else class="row justify-content-center">
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".2s" v-for="(theme, index) in gameThemes"
-                      :key="theme.id" :class="{ 'selected': selectedGameThemeId === theme.id }"
+                      :key="theme.id" 
+                      :class="[{ 'selected': selectedGameThemeId === theme.id }, { 'selected': index === 0 && !selectedGameThemeId   }]"
                       @click="selectGameTheme(theme.id)">
                       <div class="team__item">
                         <div class="team__thumb">
