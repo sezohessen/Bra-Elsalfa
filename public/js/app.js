@@ -17993,6 +17993,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     closePopup: function closePopup() {
       this.$emit("close-model");
+      console.log('close');
+    },
+    selectGameTheme: function selectGameTheme(themeId) {
+      this.selectedGameThemeId = themeId;
     }
   }
 });
@@ -18104,57 +18108,100 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-592bf8b9"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = {
-  "class": "name-popup"
+  "class": "tournament__details-area"
 };
 var _hoisted_2 = {
-  "class": "form-container"
+  "class": "container"
 };
-var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Enter your name and choose a game theme", -1 /* HOISTED */);
-});
-var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "",
-    disabled: ""
-  }, "Select a game theme", -1 /* HOISTED */);
-});
-var _hoisted_5 = ["value"];
-var _hoisted_6 = {
-  "class": "image-container"
+var _hoisted_3 = {
+  "class": "row justify-content-center"
 };
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: "https://wallpapercave.com/wp/31K91HR.jpg",
-    alt: "Registration Image"
-  }, null, -1 /* HOISTED */);
+var _hoisted_4 = {
+  "class": "blog-post-wrapper"
+};
+var _hoisted_5 = {
+  "class": "tournament__details-content"
+};
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+    style: {
+      "text-align": "center"
+    },
+    "class": "title"
+  }, "Create Room", -1 /* HOISTED */);
+});
+var _hoisted_7 = {
+  "class": "tournament__details-form"
+};
+var _hoisted_8 = {
+  "class": "team__area team-bg text",
+  "data-background": "assets/img/bg/team_bg.jpg",
+  style: {
+    "text-align": "center"
+  }
+};
+var _hoisted_9 = {
+  "class": "container"
+};
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row justify-content-center\" data-v-592bf8b9><div class=\"col-xl-6 col-lg-7 col-md-10\" data-v-592bf8b9><div class=\"section__title text-center\" data-v-592bf8b9><span class=\"sub-title tg__animate-text\" data-v-592bf8b9>Game Theme</span><h5 class=\"title\" data-v-592bf8b9>CHOOSE A GAME THEME</h5></div></div></div>", 1);
+var _hoisted_11 = {
+  "class": "row justify-content-center"
+};
+var _hoisted_12 = ["onClick"];
+var _hoisted_13 = {
+  "class": "team__item"
+};
+var _hoisted_14 = {
+  "class": "team__thumb"
+};
+var _hoisted_15 = {
+  href: "team-details.html"
+};
+var _hoisted_16 = ["src"];
+var _hoisted_17 = {
+  "class": "team__content"
+};
+var _hoisted_18 = {
+  "class": "name"
+};
+var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "designation"
+  }, "Free", -1 /* HOISTED */);
 });
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "close-icon",
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.closePopup && $options.closePopup.apply($options, arguments);
+    })
+  }, "✖"), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.creatorName = $event;
     }),
     type: "text",
-    placeholder: "Your name"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.creatorName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.selectedGameThemeId = $event;
-    })
-  }, [_hoisted_4, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.gameThemes, function (theme) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+    placeholder: "Type your name"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.creatorName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.gameThemes, function (theme, index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["col-lg-4 col-sm-6 wow fadeInUp", {
+        'selected': $data.selectedGameThemeId === theme.id
+      }]),
+      "data-wow-delay": ".2s",
       key: theme.id,
-      value: theme.id
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(theme.name), 9 /* TEXT, PROPS */, _hoisted_5);
-  }), 128 /* KEYED_FRAGMENT */))], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.selectedGameThemeId]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      onClick: function onClick($event) {
+        return $options.selectGameTheme(theme.id);
+      }
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      src: "images/profile/nft_img0".concat(index + 1, ".jpg"),
+      alt: "img"
+    }, null, 8 /* PROPS */, _hoisted_16)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(theme.name), 1 /* TEXT */), _hoisted_19])])], 10 /* CLASS, PROPS */, _hoisted_12);
+  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.submitNameAndGameTheme && $options.submitNameAndGameTheme.apply($options, arguments);
-    })
-  }, "Submit")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "close-icon",
-    onClick: _cache[3] || (_cache[3] = function () {
-      return $options.closePopup && $options.closePopup.apply($options, arguments);
-    })
-  }, "✖"), _hoisted_7])]);
+    }),
+    "class": "tournament__details-form-btn"
+  }, "Create Room")])])])])])])]);
 }
 
 /***/ }),
@@ -18584,7 +18631,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ninput[data-v-592bf8b9]{\r\n  border: 1px solid black;\n}\n.name-popup[data-v-592bf8b9] {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  z-index: 9999;\n}\n.form-container[data-v-592bf8b9] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 20px;\r\n  background-color: #fff;\r\n  border-radius: 5px;\r\n  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);\n}\n.form-container h2[data-v-592bf8b9] {\r\n  margin-bottom: 20px;\r\n  font-size: 24px;\r\n  text-align: center;\n}\n.form-container input[data-v-592bf8b9] {\r\n  margin: 10px 0;\r\n  padding: 10px;\r\n  font-size: 16px;\r\n  border-radius: 5px;\r\n  border: none;\n}\n.form-container select[data-v-592bf8b9] {\r\n  margin: 10px 0;\r\n  padding: 10px;\r\n  font-size: 16px;\r\n  border-radius: 5px;\r\n  border: none;\n}\n.form-container button[data-v-592bf8b9] {\r\n  margin-top: 20px;\r\n  padding: 10px 20px;\r\n  background-color: #3498db;\r\n  color: #fff;\r\n  border: none;\r\n  border-radius: 5px;\r\n  font-size: 16px;\r\n  cursor: pointer;\n}\n.image-container[data-v-592bf8b9] {\r\n  position: relative;\r\n  width: 400px;\r\n  height: 400px;\r\n  background-color: #fff;\r\n  border-radius: 5px;\r\n  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);\r\n  overflow: hidden;\r\n  margin-left: 20px;\n}\n.image-container img[data-v-592bf8b9] {\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.close-icon[data-v-592bf8b9] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  font-size: 24px;\r\n  font-weight: bold;\r\n  color: #fff;\r\n  cursor: pointer;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.tournament__details-area[data-v-592bf8b9]{\r\n  margin-top: 4rem;\n}\n.close-icon[data-v-592bf8b9]{\r\n  cursor: pointer;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

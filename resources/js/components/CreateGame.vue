@@ -26,116 +26,74 @@ export default {
       }
       await createRoom(this.creatorName, this.selectedGameThemeId);
     },
+
     closePopup() {
       this.$emit("close-model");
+      console.log('close')
+    },
+
+    selectGameTheme(themeId) {
+      this.selectedGameThemeId = themeId;
     }
   },
 };
 </script>
 
 <template>
-  <div class="name-popup">
-    <div class="form-container">
-      <h2>Enter your name and choose a game theme</h2>
-      <input v-model="creatorName" type="text" placeholder="Your name">
-      <select v-model="selectedGameThemeId">
-        <option value="" disabled>Select a game theme</option>
-        <option v-for="theme in gameThemes" :key="theme.id" :value="theme.id">{{ theme.name }}</option>
-      </select>
-      <button @click="submitNameAndGameTheme">Submit</button>
+  <section class="tournament__details-area">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="blog-post-wrapper">
+          <div class="tournament__details-content">
+          <div class="close-icon" @click="closePopup">&#10006;</div>
+            <h1 style="text-align: center;" class="title">Create Room</h1>
+            <div class="tournament__details-form">
+              <section class="team__area team-bg text" data-background="assets/img/bg/team_bg.jpg"
+                style="text-align: center;">
+                <input v-model="creatorName" type="text" placeholder="Type your name">
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-xl-6 col-lg-7 col-md-10">
+                      <div class="section__title text-center">
+                        <span class="sub-title tg__animate-text">Game Theme</span>
+                        <h5 class="title">CHOOSE A GAME THEME</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".2s" v-for="(theme, index) in gameThemes"
+                      :key="theme.id" :class="{ 'selected': selectedGameThemeId === theme.id }"
+                      @click="selectGameTheme(theme.id)">
+                      <div class="team__item">
+                        <div class="team__thumb">
+                          <a href="team-details.html"><img :src="`images/profile/nft_img0${index + 1}.jpg`" alt="img"></a>
+                        </div>
+                        <div class="team__content">
+                          <h4 class="name">
+                            {{ theme.name }}
+                          </h4>
+                          <span class="designation">Free</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button @click="submitNameAndGameTheme" class="tournament__details-form-btn">Create Room</button>
+              </section>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <div class="image-container">
-      <div class="close-icon" @click="closePopup">&#10006;</div>
-      <img src="https://wallpapercave.com/wp/31K91HR.jpg" alt="Registration Image">
-    </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
-input{
-  border: 1px solid black;
+.tournament__details-area{
+  margin-top: 4rem;
 }
-.name-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.form-container h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  text-align: center;
-}
-
-.form-container input {
-  margin: 10px 0;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-}
-
-.form-container select {
-  margin: 10px 0;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-}
-
-.form-container button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.image-container {
-  position: relative;
-  width: 400px;
-  height: 400px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  margin-left: 20px;
-}
-
-.image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.close-icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #fff;
+.close-icon{
   cursor: pointer;
 }
 </style>
