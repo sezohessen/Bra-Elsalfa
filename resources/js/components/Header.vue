@@ -68,7 +68,7 @@ export default {
 
                                     </ul>
                                 </div>
-                                <div class="tgmenu__action d-none d-md-block">
+                                <div v-if="isHomePage" class="tgmenu__action d-none d-md-block">
                                     <ul class="list-wrap">
                                         <li class="header-btn">
                                             <a href="#"  @click="showPopup" class="tg-border-btn">

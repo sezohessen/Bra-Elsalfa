@@ -1,0 +1,32 @@
+<script>
+export default {
+     
+}
+</script>
+
+<template>
+    <section class="tournament__details-area">
+        <div class="row justify-content-center">
+            <div class="blog-post-wrapper">
+                <div class="tournament__details-content">
+                    <h1 style="text-align: center;" class="title">Join Game</h1>
+                    <div class="tournament__details-form">
+                        <section class="team__area team-bg text" data-background="assets/img/bg/team_bg.jpg"
+                            style="text-align: center;">
+                            <input type="text" placeholder="Type your name">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-6 col-lg-7 col-md-10">
+                                        <div class="section__title text-center">
+                                            <span class="sub-title tg__animate-text">Type your name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

@@ -1,6 +1,7 @@
 <script>
 import { get } from '../api/api.js';
 import createRoom from '../utils/createGame';
+import Loader from '@/components/Loader';
 
 export default {
   data() {
@@ -39,6 +40,9 @@ export default {
       this.selectedGameThemeId = themeId;
     }
   },
+  components:{
+    Loader
+  }
 };
 </script>
 
@@ -64,7 +68,7 @@ export default {
                     </div>
                   </div>
                   <div v-if="loading" class="loading-section">
-                    Loading...
+                    <loader />
                   </div>
                   <div v-else class="row justify-content-center">
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".2s" v-for="(theme, index) in gameThemes"

@@ -30,7 +30,7 @@ class GamesController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -65,7 +65,10 @@ class GamesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $game   = $this->gameRepository->getOne($id);
+        return response()->json([
+            $game->players,
+        ]);
     }
 
     /**
