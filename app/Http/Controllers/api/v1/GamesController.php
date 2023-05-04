@@ -71,7 +71,7 @@ class GamesController extends Controller
             return response()->json(['error' => 'Game is already started'], 400);
         }
         $player = $this->playerRepository->create([
-            'name'       => $request->player_name ?: $this->faker->name,
+            'name'       => $request->name ?: $this->faker->name,
             'ip_address' => $request->ip_address
         ]);
         $game->players()->attach($player->id, ['is_creator' => false]);

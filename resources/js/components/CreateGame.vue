@@ -33,7 +33,6 @@ export default {
 
     closePopup() {
       this.$emit("close-model");
-      console.log('close')
     },
 
     selectGameTheme(themeId) {

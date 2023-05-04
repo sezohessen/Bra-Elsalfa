@@ -9,7 +9,7 @@ export default {
     },
     methods: {
         joinGame() {
-            
+            this.$emit('player-join',this.playerName)
         }
     },
     components: {
