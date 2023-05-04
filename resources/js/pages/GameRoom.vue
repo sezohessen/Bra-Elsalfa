@@ -6,6 +6,7 @@ import CustomButton from '@/components/CustomButton';
 import Loader from '@/components/Loader';
 import JoinGame from '@/components/JoinGame';
 import { get, post } from '../api/api.js';
+import  socket  from '../websocket';
 
 export default {
     components: {
@@ -42,9 +43,9 @@ export default {
                     ip_address: playerIP.value
                 });
                 const player = response.player;
-                console.log(player)
                 gamePlayers.push(player);
                 newPlayer.value = false;
+                // socket.emit('so-player-join', player);
             } catch (error) {
                 console.error(error);
             }
@@ -57,6 +58,12 @@ export default {
         onMounted(() => {
             fetchPlayer();
         });
+
+        socket.on('connect', () => {
+            console.log('Socket connection established');
+        });
+        console.log(socket);
+
 
 
         return {
