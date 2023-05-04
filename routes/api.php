@@ -33,4 +33,5 @@ Route::get('/test', function () {
 // Start
 Route::apiResource('/players',PlayersController::class);
 Route::apiResource('/games',GamesController::class);
+Route::post('/join-game/{gameID}',[GamesController::class,'joinGame']);
 Route::apiResource('/game-themes',GameThemesController::class);

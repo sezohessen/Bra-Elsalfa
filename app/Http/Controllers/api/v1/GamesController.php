@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Game\JoinGameRequest;
 use App\Http\Requests\Game\StoreGameRequest;
 use App\Models\Game;
 use App\Models\GameTheme;
@@ -18,11 +19,13 @@ class GamesController extends Controller
 {
     protected $gameRepository;
     protected $playerRepository;
+    protected $faker;
 
     public function __construct(GameRepository $gameRepository, PlayerRepository $playerRepository)
     {
         $this->gameRepository   = $gameRepository;
         $this->playerRepository = $playerRepository;
+        $this->faker = Factory::create();
     }
 
     /**
@@ -30,7 +33,6 @@ class GamesController extends Controller
      */
     public function index()
     {
-        
     }
 
     /**
@@ -42,9 +44,8 @@ class GamesController extends Controller
         $ip_address = $request->player_ip;
         $player     = Player::where('ip_address', $ip_address)->first();
         if (!$player) {
-            $faker = Factory::create();
             $player = $this->playerRepository->create([
-                'name'       => $request->player_name ?: $faker->name,
+                'name'       => $request->player_name ?: $this->faker->name,
                 'ip_address' => $ip_address
             ]);
         } else {
@@ -58,6 +59,24 @@ class GamesController extends Controller
             'game'        => $game,
             'player'      => $player,
         ]);
+    }
+
+    public function joinGame(JoinGameRequest $request, $gameID)
+    {
+        $game = $this->gameRepository->getOne($gameID);
+        if (!$game) {
+            return response()->json(['error' => 'Game not found']);
+        }
+        if ($game->status !== 'waiting') {
+            return response()->json(['error' => 'Game is already started'], 400);
+        }
+        $player = $this->playerRepository->create([
+            'name'       => $request->player_name ?: $this->faker->name,
+            'ip_address' => $request->ip_address
+        ]);
+        $game->players()->attach($player->id, ['is_creator' => false]);
+        // return the player data
+        return response()->json(['player' => $player]);
     }
 
     /**

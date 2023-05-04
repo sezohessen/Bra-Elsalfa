@@ -18107,7 +18107,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony import */ var _components_CustomButton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/CustomButton */ "./resources/js/components/CustomButton.vue");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      playerName: ''
+    };
+  },
+  methods: {
+    joinGame: function joinGame() {}
+  },
+  components: {
+    CustomButton: _components_CustomButton__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
 
 /***/ }),
 
@@ -18550,10 +18564,45 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "tournament__details-area"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row justify-content-center\"><div class=\"blog-post-wrapper\"><div class=\"tournament__details-content\"><h1 style=\"text-align:center;\" class=\"title\">Join Game</h1><div class=\"tournament__details-form\"><section class=\"team__area team-bg text\" data-background=\"assets/img/bg/team_bg.jpg\" style=\"text-align:center;\"><input type=\"text\" placeholder=\"Type your name\"><div class=\"container\"><div class=\"row justify-content-center\"><div class=\"col-xl-6 col-lg-7 col-md-10\"><div class=\"section__title text-center\"><span class=\"sub-title tg__animate-text\">Type your name</span></div></div></div></div></section></div></div></div></div>", 1);
-var _hoisted_3 = [_hoisted_2];
+var _hoisted_2 = {
+  "class": "row justify-content-center"
+};
+var _hoisted_3 = {
+  "class": "blog-post-wrapper"
+};
+var _hoisted_4 = {
+  "class": "tournament__details-content"
+};
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+  style: {
+    "text-align": "center"
+  },
+  "class": "title"
+}, "Join Game", -1 /* HOISTED */);
+var _hoisted_6 = {
+  "class": "tournament__details-form"
+};
+var _hoisted_7 = {
+  "class": "team__area team-bg text",
+  "data-background": "assets/img/bg/team_bg.jpg",
+  style: {
+    "text-align": "center"
+  }
+};
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"container\"><div class=\"row justify-content-center\"><div class=\"col-xl-6 col-lg-7 col-md-10\"><div class=\"section__title text-center\"><span class=\"sub-title tg__animate-text\">Type your name</span></div></div></div></div>", 1);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, _hoisted_3);
+  var _component_CustomButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CustomButton");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.playerName = $event;
+    }),
+    type: "text",
+    placeholder: "Type your name"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.playerName]]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomButton, {
+    text: 'Join Lobby',
+    emitName: 'join-game',
+    onJoinGame: $options.joinGame
+  }, null, 8 /* PROPS */, ["onJoinGame"])])])])])])]);
 }
 
 /***/ }),
