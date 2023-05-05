@@ -16,6 +16,13 @@ export default {
     },
 
     setup() {
+
+        window.Echo.channel('player-join')
+        .listen('PlayerJoinEvent', (e) => {
+            console.log('Suiiiiiiiiii')
+        });
+
+
         const route = useRoute();
         const gameId = ref(route.params.id);
 
