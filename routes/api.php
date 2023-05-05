@@ -4,6 +4,7 @@ use App\Events\PlayerJoinEvent;
 use App\Http\Controllers\api\v1\GamesController;
 use App\Http\Controllers\api\v1\GameThemesController;
 use App\Http\Controllers\api\v1\PlayersController;
+use App\Http\Controllers\TestController;
 use App\Models\Game;
 use App\Models\Player;
 use Illuminate\Http\Request;
@@ -23,8 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
+Route::get('/testing', [TestController::class,'index']);
 Route::get('/test', function () {
     $test = Player::find('3b4f7acb-49c9-4752-88da-90a6fdafff34');
 

@@ -18204,7 +18204,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   setup: function setup() {
     window.Echo.channel('player-join').listen('PlayerJoinEvent', function (e) {
-      console.log('Suiiiiiiiiii');
+      console.log(e);
+      gamePlayers.push(e.data);
     });
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_6__.useRoute)();
     var gameId = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(route.params.id);
@@ -18243,7 +18244,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
     var joinGame = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(newPlayerName) {
-        var response, player;
+        var response;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
@@ -18255,21 +18256,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               });
             case 3:
               response = _context2.sent;
-              player = response.player;
-              gamePlayers.push(player);
+              /*   const player = response.player;
+                gamePlayers.push(player); */
               newPlayer.value = false;
               // socket.emit('so-player-join', player);
-              _context2.next = 12;
+              _context2.next = 10;
               break;
-            case 9:
-              _context2.prev = 9;
+            case 7:
+              _context2.prev = 7;
               _context2.t0 = _context2["catch"](0);
               console.error(_context2.t0);
-            case 12:
+            case 10:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[0, 9]]);
+        }, _callee2, null, [[0, 7]]);
       }));
       return function joinGame(_x) {
         return _ref2.apply(this, arguments);

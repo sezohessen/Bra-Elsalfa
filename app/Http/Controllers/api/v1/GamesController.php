@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Events\PlayerJoinEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\JoinGameRequest;
 use App\Http\Requests\Game\StoreGameRequest;
@@ -76,6 +77,7 @@ class GamesController extends Controller
         ]);
         $game->players()->attach($player->id, ['is_creator' => false]);
         // return the player data
+        event(new PlayerJoinEvent($player));
         return response()->json(['player' => $player]);
     }
 

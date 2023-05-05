@@ -19,7 +19,8 @@ export default {
 
         window.Echo.channel('player-join')
         .listen('PlayerJoinEvent', (e) => {
-            console.log('Suiiiiiiiiii')
+            console.log(e);
+            gamePlayers.push(e.data);
         });
 
 
@@ -48,8 +49,8 @@ export default {
                     name: newPlayerName,
                     ip_address: playerIP.value
                 });
-                const player = response.player;
-                gamePlayers.push(player);
+              /*   const player = response.player;
+                gamePlayers.push(player); */
                 newPlayer.value = false;
                 // socket.emit('so-player-join', player);
             } catch (error) {

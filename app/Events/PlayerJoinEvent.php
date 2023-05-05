@@ -19,13 +19,15 @@ class PlayerJoinEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public $player;
+    public function __construct($player)
     {
+        $this->player = $player;
     }
 
     public function broadcastWith()
     {
-        return ['message' => "it's working"];
+        return ['message' => "it's working","data"  => $this->player];
     }
 
     /**
