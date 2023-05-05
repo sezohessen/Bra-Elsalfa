@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class PlayerJoinEvent implements ShouldBroadcast
@@ -20,7 +21,6 @@ class PlayerJoinEvent implements ShouldBroadcast
      */
     public function __construct()
     {
-        //
     }
 
     public function broadcastWith()
