@@ -1,5 +1,5 @@
 <script>
-import { ref, reactive, onMounted, watchEffect } from 'vue';
+import { ref, reactive, onMounted, watchEffect, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Lobby from '@/components/Lobby';
 import CustomButton from '@/components/CustomButton';
@@ -18,10 +18,10 @@ export default {
     setup() {
 
         window.Echo.channel('player-join')
-        .listen('PlayerJoinEvent', (e) => {
-            console.log(e);
-            gamePlayers.push(e.data);
-        });
+            .listen('PlayerJoinEvent', (e) => {
+                console.log(e);
+                gamePlayers.push(e.data);
+            });
 
 
         const route = useRoute();
@@ -29,7 +29,6 @@ export default {
 
         const playerIP = ref(localStorage.getItem('playerIP') || '127.0.0.1');
 
-        const newPlayer = ref(true);
         const gamePlayers = reactive([]);
         const loading = ref(true);
 
@@ -43,16 +42,21 @@ export default {
             }
         };
 
+        const PlayerExists = () => {
+            for (let i = 0; i < gamePlayers.length; i++) {
+                if (gamePlayers[i].ip_address === playerIP.value) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         const joinGame = async (newPlayerName) => {
             try {
                 const response = await post(`join-game/${gameId.value}`, {
                     name: newPlayerName,
                     ip_address: playerIP.value
                 });
-              /*   const player = response.player;
-                gamePlayers.push(player); */
-                newPlayer.value = false;
-                // socket.emit('so-player-join', player);
             } catch (error) {
                 console.error(error);
             }
@@ -64,20 +68,17 @@ export default {
 
         onMounted(() => {
             fetchPlayer();
-
-
-
         });
 
-
-
+        const showJoinGame = computed(() => {
+            return !PlayerExists() && !loading.value;
+        });
         return {
-            newPlayer,
+            showJoinGame,
             gamePlayers,
             loading,
             joinGame,
             startGame,
-
         };
     }
 };
@@ -88,7 +89,7 @@ export default {
             <div v-if="loading">
                 <Loader class="loader--hidden" />
             </div>
-            <JoinGame v-if="newPlayer" @player-join="joinGame" />
+            <JoinGame v-if="showJoinGame" @player-join="joinGame" />
             <Lobby :gamePlayers='gamePlayers' />
             <CustomButton :text="'Play'" :emitName="'start-game'" @start-game="startGame" />
         </div>

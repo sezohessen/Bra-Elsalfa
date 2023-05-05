@@ -14,11 +14,13 @@ export default {
                 const ip = await getIP();
                 localStorage.setItem('playerIP', ip);
                 this.playerIP = ip;
+                
             } 
         },
     },
     created() {
         this.getPlayerIP();
+
     },
 };
 </script>

@@ -18210,7 +18210,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_6__.useRoute)();
     var gameId = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(route.params.id);
     var playerIP = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(localStorage.getItem('playerIP') || '127.0.0.1');
-    var newPlayer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     var gamePlayers = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)([]);
     var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     var fetchPlayer = /*#__PURE__*/function () {
@@ -18242,6 +18241,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return _ref.apply(this, arguments);
       };
     }();
+    var PlayerExists = function PlayerExists() {
+      for (var i = 0; i < gamePlayers.length; i++) {
+        if (gamePlayers[i].ip_address === playerIP.value) {
+          return true;
+        }
+      }
+      return false;
+    };
     var joinGame = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(newPlayerName) {
         var response;
@@ -18256,21 +18263,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               });
             case 3:
               response = _context2.sent;
-              /*   const player = response.player;
-                gamePlayers.push(player); */
-              newPlayer.value = false;
-              // socket.emit('so-player-join', player);
-              _context2.next = 10;
+              _context2.next = 9;
               break;
-            case 7:
-              _context2.prev = 7;
+            case 6:
+              _context2.prev = 6;
               _context2.t0 = _context2["catch"](0);
               console.error(_context2.t0);
-            case 10:
+            case 9:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee2, null, [[0, 6]]);
       }));
       return function joinGame(_x) {
         return _ref2.apply(this, arguments);
@@ -18282,8 +18285,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       fetchPlayer();
     });
+    var showJoinGame = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return !PlayerExists() && !loading.value;
+    });
     return {
-      newPlayer: newPlayer,
+      showJoinGame: showJoinGame,
       gamePlayers: gamePlayers,
       loading: loading,
       joinGame: joinGame,
@@ -18832,7 +18838,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_CustomButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CustomButton");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$setup.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Loader, {
     "class": "loader--hidden"
-  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.newPlayer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_JoinGame, {
+  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.showJoinGame ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_JoinGame, {
     key: 1,
     onPlayerJoin: $setup.joinGame
   }, null, 8 /* PROPS */, ["onPlayerJoin"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Lobby, {
@@ -28570,13 +28576,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _App_vue_vue_type_template_id_f348271a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=f348271a */ "./resources/js/App.vue?vue&type=template&id=f348271a");
 /* harmony import */ var _App_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js */ "./resources/js/App.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_App_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_App_vue_vue_type_template_id_f348271a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/App.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_App_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_App_vue_vue_type_template_id_f348271a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/App.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -28599,7 +28605,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CreateGame_vue_vue_type_template_id_592bf8b9_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateGame.vue?vue&type=template&id=592bf8b9&scoped=true */ "./resources/js/components/CreateGame.vue?vue&type=template&id=592bf8b9&scoped=true");
 /* harmony import */ var _CreateGame_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateGame.vue?vue&type=script&lang=js */ "./resources/js/components/CreateGame.vue?vue&type=script&lang=js");
 /* harmony import */ var _CreateGame_vue_vue_type_style_index_0_id_592bf8b9_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateGame.vue?vue&type=style&index=0&id=592bf8b9&scoped=true&lang=css */ "./resources/js/components/CreateGame.vue?vue&type=style&index=0&id=592bf8b9&scoped=true&lang=css");
-/* harmony import */ var _Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -28607,7 +28613,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,_Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_CreateGame_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CreateGame_vue_vue_type_template_id_592bf8b9_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-592bf8b9"],['__file',"resources/js/components/CreateGame.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_CreateGame_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CreateGame_vue_vue_type_template_id_592bf8b9_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-592bf8b9"],['__file',"resources/js/components/CreateGame.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -28630,7 +28636,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CustomButton_vue_vue_type_template_id_edd77f24_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomButton.vue?vue&type=template&id=edd77f24&scoped=true */ "./resources/js/components/CustomButton.vue?vue&type=template&id=edd77f24&scoped=true");
 /* harmony import */ var _CustomButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CustomButton.vue?vue&type=script&lang=js */ "./resources/js/components/CustomButton.vue?vue&type=script&lang=js");
 /* harmony import */ var _CustomButton_vue_vue_type_style_index_0_id_edd77f24_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CustomButton.vue?vue&type=style&index=0&id=edd77f24&scoped=true&lang=css */ "./resources/js/components/CustomButton.vue?vue&type=style&index=0&id=edd77f24&scoped=true&lang=css");
-/* harmony import */ var _Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -28638,7 +28644,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,_Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_CustomButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CustomButton_vue_vue_type_template_id_edd77f24_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-edd77f24"],['__file',"resources/js/components/CustomButton.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_CustomButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CustomButton_vue_vue_type_template_id_edd77f24_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-edd77f24"],['__file',"resources/js/components/CustomButton.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -28660,13 +28666,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Header_vue_vue_type_template_id_1f42fb90__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Header.vue?vue&type=template&id=1f42fb90 */ "./resources/js/components/Header.vue?vue&type=template&id=1f42fb90");
 /* harmony import */ var _Header_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Header.vue?vue&type=script&lang=js */ "./resources/js/components/Header.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Header_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Header_vue_vue_type_template_id_1f42fb90__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/Header.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Header_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Header_vue_vue_type_template_id_1f42fb90__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/Header.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -28688,13 +28694,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _JoinGame_vue_vue_type_template_id_5ad58fa7__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JoinGame.vue?vue&type=template&id=5ad58fa7 */ "./resources/js/components/JoinGame.vue?vue&type=template&id=5ad58fa7");
 /* harmony import */ var _JoinGame_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JoinGame.vue?vue&type=script&lang=js */ "./resources/js/components/JoinGame.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_JoinGame_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_JoinGame_vue_vue_type_template_id_5ad58fa7__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/JoinGame.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_JoinGame_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_JoinGame_vue_vue_type_template_id_5ad58fa7__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/JoinGame.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -28716,14 +28722,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Loader_vue_vue_type_template_id_e79ec684_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loader.vue?vue&type=template&id=e79ec684&scoped=true */ "./resources/js/components/Loader.vue?vue&type=template&id=e79ec684&scoped=true");
 /* harmony import */ var _Loader_vue_vue_type_style_index_0_id_e79ec684_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Loader.vue?vue&type=style&index=0&id=e79ec684&scoped=true&lang=css */ "./resources/js/components/Loader.vue?vue&type=style&index=0&id=e79ec684&scoped=true&lang=css");
-/* harmony import */ var _Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 const script = {}
 
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,_Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(script, [['render',_Loader_vue_vue_type_template_id_e79ec684_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-e79ec684"],['__file',"resources/js/components/Loader.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(script, [['render',_Loader_vue_vue_type_template_id_e79ec684_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-e79ec684"],['__file',"resources/js/components/Loader.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -28745,13 +28751,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Lobby_vue_vue_type_template_id_5806797b__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Lobby.vue?vue&type=template&id=5806797b */ "./resources/js/components/Lobby.vue?vue&type=template&id=5806797b");
 /* harmony import */ var _Lobby_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Lobby.vue?vue&type=script&lang=js */ "./resources/js/components/Lobby.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Lobby_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Lobby_vue_vue_type_template_id_5806797b__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/Lobby.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Lobby_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Lobby_vue_vue_type_template_id_5806797b__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/Lobby.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -28772,12 +28778,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Logo_vue_vue_type_template_id_1c796f16__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Logo.vue?vue&type=template&id=1c796f16 */ "./resources/js/components/Logo.vue?vue&type=template&id=1c796f16");
-/* harmony import */ var _Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 const script = {}
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__["default"])(script, [['render',_Logo_vue_vue_type_template_id_1c796f16__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/Logo.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__["default"])(script, [['render',_Logo_vue_vue_type_template_id_1c796f16__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/Logo.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -28800,7 +28806,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _GameRoom_vue_vue_type_template_id_c9ff7814_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GameRoom.vue?vue&type=template&id=c9ff7814&scoped=true */ "./resources/js/pages/GameRoom.vue?vue&type=template&id=c9ff7814&scoped=true");
 /* harmony import */ var _GameRoom_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GameRoom.vue?vue&type=script&lang=js */ "./resources/js/pages/GameRoom.vue?vue&type=script&lang=js");
 /* harmony import */ var _GameRoom_vue_vue_type_style_index_0_id_c9ff7814_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GameRoom.vue?vue&type=style&index=0&id=c9ff7814&scoped=true&lang=css */ "./resources/js/pages/GameRoom.vue?vue&type=style&index=0&id=c9ff7814&scoped=true&lang=css");
-/* harmony import */ var _Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -28808,7 +28814,7 @@ __webpack_require__.r(__webpack_exports__);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,_Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_GameRoom_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_GameRoom_vue_vue_type_template_id_c9ff7814_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-c9ff7814"],['__file',"resources/js/pages/GameRoom.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_GameRoom_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_GameRoom_vue_vue_type_template_id_c9ff7814_scoped_true__WEBPACK_IMPORTED_MODULE_0__.render],['__scopeId',"data-v-c9ff7814"],['__file',"resources/js/pages/GameRoom.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -28830,13 +28836,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _WelcomePage_vue_vue_type_template_id_bec0ecd0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WelcomePage.vue?vue&type=template&id=bec0ecd0 */ "./resources/js/pages/WelcomePage.vue?vue&type=template&id=bec0ecd0");
 /* harmony import */ var _WelcomePage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WelcomePage.vue?vue&type=script&lang=js */ "./resources/js/pages/WelcomePage.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,_Users_sezoh_Documents_Work_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_WelcomePage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_WelcomePage_vue_vue_type_template_id_bec0ecd0__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/WelcomePage.vue"]])
+const __exports__ = /*#__PURE__*/(0,D_Guess_Who_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_WelcomePage_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_WelcomePage_vue_vue_type_template_id_bec0ecd0__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/pages/WelcomePage.vue"]])
 /* hot reload */
 if (false) {}
 
