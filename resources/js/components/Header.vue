@@ -20,10 +20,11 @@ export default {
     setup() {
         const route = useRoute();
 
-        const showCreateGameModel = ref(false);
         const isHomePage = computed(() => {
             return route.path === '/';
         });
+
+        const showCreateGameModel = ref(false);
 
         function showPopup() {
             showCreateGameModel.value = true;

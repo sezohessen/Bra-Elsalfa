@@ -1,29 +1,32 @@
 <script>
+import { ref, onMounted } from 'vue';
 import getIP from '../utils/getIP';
 
 export default {
-    name: "WelcomePage",
-    data() {
-        return {
-            playerIP: localStorage.getItem('playerIP') || null,
-        };
-    },
-    methods: {
-        async getPlayerIP() {
-            if (this.playerIP === null) {
+    name: 'WelcomePage',
+
+    setup() {
+        const playerIP = ref(localStorage.getItem('playerIP') || null);
+
+        const getPlayerIP = async () => {
+            if (playerIP.value === null) {
                 const ip = await getIP();
                 localStorage.setItem('playerIP', ip);
-                this.playerIP = ip;
-                
-            } 
-        },
-    },
-    created() {
-        this.getPlayerIP();
+                playerIP.value = ip;
+            }
+        };
 
+        onMounted(() => {
+            getPlayerIP();
+        });
+
+        return {
+            playerIP,
+        };
     },
 };
 </script>
+
 
 <template>
     <section class="slider__area slider__bg" data-background="assets/img/slider/slider_bg.jpg">
@@ -36,9 +39,6 @@ export default {
                                 <h6 class="sub-title wow fadeInUp" data-wow-delay=".2s">live rooms</h6>
                                 <h2 class="title wow fadeInUp" data-wow-delay=".5s">who is the outcast</h2>
                                 <p class="wow fadeInUp" data-wow-delay=".8s">Play with friends</p>
-                                <div class="slider__btn wow fadeInUp" data-wow-delay="1.2s">
-                                    <a href="contact.html" class="tg-btn-1"><span>Play Now</span></a>
-                                </div>
                             </div>
                         </div>
                         <div class="col-xxl-6 col-xl-5 col-lg-6">
