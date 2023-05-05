@@ -16,22 +16,22 @@ export default {
     },
 
     setup() {
-
         window.Echo.channel('player-join')
-            .listen('PlayerJoinEvent', (e) => {
-                console.log(e);
-                gamePlayers.push(e.data);
-            });
-
-
+        .listen('PlayerJoinEvent', (e) => {
+            console.log(e);
+            gamePlayers.push(e.data);
+        });
+        
+        
         const route = useRoute();
         const gameId = ref(route.params.id);
-
+        
         const playerIP = ref(localStorage.getItem('playerIP') || '127.0.0.1');
-
+        
         const gamePlayers = reactive([]);
         const loading = ref(true);
-
+        
+        const Creator = ref();
         const fetchPlayer = async () => {
             try {
                 const response = await get(`games/${gameId.value}`);
@@ -41,7 +41,7 @@ export default {
                 console.error(error);
             }
         };
-
+        
         const PlayerExists = () => {
             for (let i = 0; i < gamePlayers.length; i++) {
                 if (gamePlayers[i].ip_address === playerIP.value) {
@@ -50,6 +50,14 @@ export default {
             }
             return false;
         }
+        const getCreator = async () => {
+            try {
+                const response = await get(`creator/${gameId.value}`);
+                Creator.value = response;
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
         const joinGame = async (newPlayerName) => {
             try {
@@ -65,9 +73,10 @@ export default {
         const startGame = () => {
             console.log('start game gooooooo');
         };
-
+        
         onMounted(() => {
             fetchPlayer();
+            getCreator();
         });
 
         const showJoinGame = computed(() => {
@@ -79,6 +88,9 @@ export default {
             loading,
             joinGame,
             startGame,
+            getCreator,
+            Creator,
+            playerIP
         };
     }
 };

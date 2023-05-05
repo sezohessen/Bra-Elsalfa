@@ -35,6 +35,7 @@ Route::get('/test', function () {
 Route::apiResource('/players',PlayersController::class);
 Route::apiResource('/games',GamesController::class);
 Route::post('/join-game/{gameID}',[GamesController::class,'joinGame']);
+Route::get('/creator/{gameID}',[GamesController::class,'creatorIP']);
 Route::apiResource('/game-themes',GameThemesController::class);
 
 Route::get('/test-player-join-event', function () {

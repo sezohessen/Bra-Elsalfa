@@ -49,6 +49,10 @@ class Game extends Model
         return $this->belongsToMany(Player::class, 'game_players')
             ->withPivot('is_creator');
     }
+    public function creator()
+    {
+        return $this->players()->where('is_creator',1)->first();
+    }
 
     public function gameTheme()
     {

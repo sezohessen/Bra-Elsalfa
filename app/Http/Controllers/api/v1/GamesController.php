@@ -107,4 +107,9 @@ class GamesController extends Controller
     {
         //
     }
+    public function creatorIP($game_id)
+    {
+        $game = $this->gameRepository->getOne($game_id);
+        return $game->creator();
+    }
 }

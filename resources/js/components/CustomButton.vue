@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-    <div class="about__buttons pt-10">
+    <div class="about__buttons pt-10" >
         <a @click="play" class="tg-btn-2 -secondary">{{ text }}</a>
     </div>
 </template>
