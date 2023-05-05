@@ -31,7 +31,8 @@ export default {
         const gamePlayers = reactive([]);
         const loading = ref(true);
         
-        const Creator = ref();
+        const CreatorIP   = ref();
+        
         const fetchPlayer = async () => {
             try {
                 const response = await get(`games/${gameId.value}`);
@@ -50,10 +51,16 @@ export default {
             }
             return false;
         }
+
+        const isCreator = computed(() => {
+            return  CreatorIP.value == playerIP.value;
+        });
+
         const getCreator = async () => {
             try {
                 const response = await get(`creator/${gameId.value}`);
-                Creator.value = response;
+                CreatorIP.value = response.ip_address;
+
             } catch (error) {
                 console.error(error);
             }
@@ -88,9 +95,8 @@ export default {
             loading,
             joinGame,
             startGame,
-            getCreator,
-            Creator,
-            playerIP
+            playerIP,
+            isCreator
         };
     }
 };
@@ -103,7 +109,7 @@ export default {
             </div>
             <JoinGame v-if="showJoinGame" @player-join="joinGame" />
             <Lobby :gamePlayers='gamePlayers' />
-            <CustomButton :text="'Play'" :emitName="'start-game'" @start-game="startGame" />
+            <CustomButton v-if="isCreator" :text="'Play'" :emitName="'start-game'" @start-game="startGame" />
         </div>
     </section>
 </template>
