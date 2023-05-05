@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\PlayerJoinEvent;
 use App\Http\Controllers\api\v1\GamesController;
 use App\Http\Controllers\api\v1\GameThemesController;
 use App\Http\Controllers\api\v1\PlayersController;
@@ -35,3 +36,8 @@ Route::apiResource('/players',PlayersController::class);
 Route::apiResource('/games',GamesController::class);
 Route::post('/join-game/{gameID}',[GamesController::class,'joinGame']);
 Route::apiResource('/game-themes',GameThemesController::class);
+
+Route::get('/test-player-join-event', function () {
+    event(new PlayerJoinEvent());
+    return response()->json(['message' => 'PlayerJoinEvent dispatched']);
+});

@@ -6,7 +6,7 @@ import CustomButton from '@/components/CustomButton';
 import Loader from '@/components/Loader';
 import JoinGame from '@/components/JoinGame';
 import { get, post } from '../api/api.js';
-import  socket  from '../websocket';
+import { echo } from '../websocket';
 
 export default {
     components: {
@@ -57,12 +57,12 @@ export default {
 
         onMounted(() => {
             fetchPlayer();
-        });
 
-        socket.on('connect', () => {
-            console.log('Socket connection established');
+            echo.channel('player-join').listen('.PlayerJoinEvent', (e) => {
+                console.log('Player join event received:', e);
+            });
+
         });
-        console.log(socket);
 
 
 

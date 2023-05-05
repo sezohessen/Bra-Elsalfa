@@ -1,5 +1,16 @@
-import io from 'socket.io-client';
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
 
-const socket = io('http://localhost:8000'); // replace with your server URL
+window.Pusher = Pusher;
 
-export default socket;
+export const echo = new Echo({
+  broadcaster: 'pusher',
+  key: 'local',
+  wsHost: window.location.hostname,
+  cluster: 'mt1',
+  wsPort: 6001,
+  wssPort: 443,
+  forceTLS: false,
+  disableStats: true,
+  enabledTransports: ['ws', 'wss'],
+});
