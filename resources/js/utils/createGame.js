@@ -9,8 +9,6 @@ const createGame = async (name, gameThemeId,creatorIP) => {
 
   const { game, player } = response;
 
-  sessionStorage.setItem('player', player);
-
   window.location.href = `/${game.id}`;
 };
 
