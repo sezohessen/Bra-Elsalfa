@@ -20,7 +20,7 @@ export default {
     const loadingTheme = ref(true);
     const gameThemes = ref([]);
     const CreationLoader = ref(false);
-
+    
     const loadGameThemes = async () => {
       gameThemes.value = loadSession('gameThemes', 12);
       console.log(gameThemes.value)

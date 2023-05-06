@@ -17,22 +17,21 @@ export default {
 
     setup() {
         window.Echo.channel('player-join')
-        .listen('PlayerJoinEvent', (e) => {
-            console.log(e);
-            gamePlayers.push(e.data);
-        });
-        
-        
+            .listen('PlayerJoinEvent', (e) => {
+                console.log(e);
+                gamePlayers.push(e.data);
+            });
+
+
         const route = useRoute();
         const gameId = ref(route.params.id);
-        
+
         const playerIP = ref(localStorage.getItem('playerIP') || '127.0.0.1');
-        
         const gamePlayers = reactive([]);
         const loading = ref(true);
-        
-        const CreatorIP   = ref();
-        
+        const isJoinRequestSend = ref(false);
+        const CreatorIP = ref();
+
         const fetchPlayer = async () => {
             try {
                 const response = await get(`games/${gameId.value}`);
@@ -42,7 +41,7 @@ export default {
                 console.error(error);
             }
         };
-        
+
         const PlayerExists = () => {
             for (let i = 0; i < gamePlayers.length; i++) {
                 if (gamePlayers[i].ip_address === playerIP.value) {
@@ -53,7 +52,7 @@ export default {
         }
 
         const isCreator = computed(() => {
-            return  CreatorIP.value == playerIP.value;
+            return CreatorIP.value == playerIP.value;
         });
 
         const getCreator = async () => {
@@ -68,19 +67,25 @@ export default {
 
         const joinGame = async (newPlayerName) => {
             try {
+                if (isJoinRequestSend.value) { // Prevent multiple database calls 
+                    return;
+                }
+                isJoinRequestSend.value = true;
                 const response = await post(`join-game/${gameId.value}`, {
                     name: newPlayerName,
                     ip_address: playerIP.value
                 });
+                isJoinRequestSend.value = false;
             } catch (error) {
                 console.error(error);
+                isJoinRequestSend.value = false;
             }
         };
 
         const startGame = () => {
             console.log('start game gooooooo');
         };
-        
+
         onMounted(() => {
             fetchPlayer();
             getCreator();

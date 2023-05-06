@@ -18244,6 +18244,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var playerIP = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(localStorage.getItem('playerIP') || '127.0.0.1');
     var gamePlayers = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)([]);
     var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
+    var isJoinRequestSend = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var CreatorIP = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var fetchPlayer = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -18320,24 +18321,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               _context3.prev = 0;
-              _context3.next = 3;
+              if (!isJoinRequestSend.value) {
+                _context3.next = 3;
+                break;
+              }
+              return _context3.abrupt("return");
+            case 3:
+              isJoinRequestSend.value = true;
+              _context3.next = 6;
               return (0,_api_api_js__WEBPACK_IMPORTED_MODULE_5__.post)("join-game/".concat(gameId.value), {
                 name: newPlayerName,
                 ip_address: playerIP.value
               });
-            case 3:
-              response = _context3.sent;
-              _context3.next = 9;
-              break;
             case 6:
-              _context3.prev = 6;
+              response = _context3.sent;
+              isJoinRequestSend.value = false;
+              _context3.next = 14;
+              break;
+            case 10:
+              _context3.prev = 10;
               _context3.t0 = _context3["catch"](0);
               console.error(_context3.t0);
-            case 9:
+              isJoinRequestSend.value = false;
+            case 14:
             case "end":
               return _context3.stop();
           }
-        }, _callee3, null, [[0, 6]]);
+        }, _callee3, null, [[0, 10]]);
       }));
       return function joinGame(_x) {
         return _ref3.apply(this, arguments);
