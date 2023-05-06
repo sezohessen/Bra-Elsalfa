@@ -3,15 +3,13 @@ import { ref, onMounted, defineEmits } from 'vue';
 import { get } from '../api/api.js';
 import createRoom from '../utils/createGame';
 import Loader from '@/components/Loader';
-import CreationLoader from '@/components/CreationLoader';
 import { saveSession } from '../utils/saveSession';
 import { loadSession } from '../utils/loadSession';
 
 export default {
   name: 'CreateGame',
   components: {
-    Loader,
-    CreationLoader
+    Loader
   },
   emits: ['close-model'],
   setup(props, { emit }) {
@@ -77,7 +75,7 @@ export default {
       <div class="row justify-content-center">
         <div class="blog-post-wrapper">
           <div class="tournament__details-content">
-            <CreationLoader v-show="CreationLoader" />
+            <Loader :message="'Creating Game In Progress...'" v-show="CreationLoader" />
             <div v-if="!CreationLoader" class="game-creating-section">
               <div class="close-icon" @click="closePopup">&#10006;</div>
               <h1 style="text-align: center;" class="title">Create Room</h1>

@@ -3,7 +3,7 @@ import { ref, reactive, onMounted, watchEffect, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Lobby from '@/components/Lobby';
 import CustomButton from '@/components/CustomButton';
-import Loader from '@/components/JoiningLoader';
+import Loader from '@/components/Loader';
 import JoinGame from '@/components/JoinGame';
 import { get, post } from '../api/api.js';
 
@@ -49,10 +49,6 @@ export default {
             return false;
         }
 
-        const isCreator = computed(() => {
-            return CreatorIP.value == playerIP.value;
-        });
-
         const getCreator = async () => {
             try {
                 const response = await get(`creator/${gameId.value}`);
@@ -62,6 +58,9 @@ export default {
                 console.error(error);
             }
         };
+        const isCreator = computed(() => {
+            return CreatorIP.value == playerIP.value;
+        });
 
         const closeJoinModal = () => {
             showJoinGame.value = false;
@@ -79,7 +78,7 @@ export default {
         const showJoinGame = computed(() => {
             return !PlayerExists() && !loading.value;
         });
-        
+
         return {
             showJoinGame,
             gamePlayers,
@@ -97,7 +96,7 @@ export default {
     <section class="streamers__area padd-top">
         <div class="container">
             <div v-show="loading">
-                <Loader class="loader--hidden" />
+                <Loader :message="'Joining Game In Progress...'" class="loader--hidden" />
             </div>
             <JoinGame v-if="showJoinGame" @close-join="closeJoinModal" />
             <Lobby :gamePlayers='gamePlayers' />
