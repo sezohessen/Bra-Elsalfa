@@ -19,7 +19,7 @@ import Echo from 'laravel-echo';
 
 import Pusher from 'pusher-js';
 window.Pusher = Pusher;
-
+window.BaseURL = 'http://127.0.0.1:8000/';
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'local',
