@@ -1,46 +1,67 @@
 <script>
+import { ref, onMounted, defineEmits } from 'vue';
 import { get } from '../api/api.js';
 import createRoom from '../utils/createGame';
 import Loader from '@/components/Loader';
+import { saveSession } from '../utils/saveSession';
+import { loadSession } from '../utils/loadSession';
 
 export default {
-  data() {
-    return {
-      creatorName: "",
-      selectedGameThemeId: "",
-      gameThemes: [],
-      loading: true,
+  name: 'CreateGame',
+  components: {
+    Loader
+  },
+  emits: ['close-model'],
+  setup(props, { emit }) {
+    const creatorName = ref('');
+    const selectedGameThemeId = ref('');
+    const loading = ref(true);
+    const gameThemes = ref([]);
+
+    const loadGameThemes = async () => {
+      gameThemes.value = loadSession('gameThemes', 12);
+      console.log(gameThemes.value)
+      if (!gameThemes.value) {
+        try {
+          const response = await get('game-themes');
+          gameThemes.value = response;
+          saveSession('gameThemes', gameThemes.value, 12);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      loading.value = false
     };
-  },
-  async mounted() {
-    try {
-      const response = await get('game-themes');
-      this.gameThemes = response;
-    } catch (error) {
-      console.error(error);
-    } finally {
-      this.loading = false;
-    }
-  },
-  methods: {
-    async create() {
-      if (!this.selectedGameThemeId) {
-        this.selectedGameThemeId = this.gameThemes[0]
+
+    const create = async () => {
+      if (!selectedGameThemeId.value) {
+        selectedGameThemeId.value = gameThemes.value[0].id;
       }
       const playerIP = localStorage.getItem('playerIP');
-      await createRoom(this.creatorName, this.selectedGameThemeId, playerIP);
-    },
+      await createRoom(creatorName.value, selectedGameThemeId.value, playerIP);
+    };
 
-    closePopup() {
-      this.$emit("close-model");
-    },
+    const closePopup = () => {
+      emit('close-model');
+    };
 
-    selectGameTheme(themeId) {
-      this.selectedGameThemeId = themeId;
-    }
-  },
-  components:{
-    Loader
+    const selectGameTheme = (themeId) => {
+      selectedGameThemeId.value = themeId;
+    };
+
+    onMounted(() => {
+      loadGameThemes();
+    });
+
+    return {
+      creatorName,
+      selectedGameThemeId,
+      gameThemes,
+      loading,
+      create,
+      closePopup,
+      selectGameTheme
+    };
   }
 };
 </script>
@@ -71,8 +92,8 @@ export default {
                   </div>
                   <div v-else class="row justify-content-center">
                     <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".2s" v-for="(theme, index) in gameThemes"
-                      :key="theme.id" 
-                      :class="[{ 'selected': selectedGameThemeId === theme.id }, { 'selected': index === 0 && !selectedGameThemeId   }]"
+                      :key="theme.id"
+                      :class="[{ 'selected': selectedGameThemeId === theme.id }, { 'selected': index === 0 && !selectedGameThemeId }]"
                       @click="selectGameTheme(theme.id)">
                       <div class="team__item">
                         <div class="team__thumb">

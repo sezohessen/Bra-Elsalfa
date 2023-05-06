@@ -148,7 +148,7 @@ export default {
             </div>
         </div>
         <div class="offCanvas__overlay"></div>
-        <CreateGame v-if="showCreateGameModel" @close-model="closeModel"  />
+        <CreateGame v-show="showCreateGameModel" @close-model="closeModel"  />
 
 
     </header>
