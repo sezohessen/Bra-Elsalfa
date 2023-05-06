@@ -3,7 +3,7 @@ import { ref, reactive, onMounted, watchEffect, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Lobby from '@/components/Lobby';
 import CustomButton from '@/components/CustomButton';
-import Loader from '@/components/Loader';
+import Loader from '@/components/JoiningLoader';
 import JoinGame from '@/components/JoinGame';
 import { get, post } from '../api/api.js';
 
@@ -18,7 +18,6 @@ export default {
     setup() {
         window.Echo.channel('player-join')
             .listen('PlayerJoinEvent', (e) => {
-                console.log(e);
                 gamePlayers.push(e.data);
             });
 
@@ -29,7 +28,6 @@ export default {
         const playerIP = ref(localStorage.getItem('playerIP') || '127.0.0.1');
         const gamePlayers = reactive([]);
         const loading = ref(true);
-        const isJoinRequestSend = ref(false);
         const CreatorIP = ref();
 
         const fetchPlayer = async () => {
@@ -65,21 +63,8 @@ export default {
             }
         };
 
-        const joinGame = async (newPlayerName) => {
-            try {
-                if (isJoinRequestSend.value) { // Prevent multiple database calls 
-                    return;
-                }
-                isJoinRequestSend.value = true;
-                const response = await post(`join-game/${gameId.value}`, {
-                    name: newPlayerName,
-                    ip_address: playerIP.value
-                });
-                isJoinRequestSend.value = false;
-            } catch (error) {
-                console.error(error);
-                isJoinRequestSend.value = false;
-            }
+        const closeJoinModal = () => {
+            showJoinGame.value = false;
         };
 
         const startGame = () => {
@@ -94,11 +79,12 @@ export default {
         const showJoinGame = computed(() => {
             return !PlayerExists() && !loading.value;
         });
+        
         return {
             showJoinGame,
             gamePlayers,
             loading,
-            joinGame,
+            closeJoinModal,
             startGame,
             playerIP,
             isCreator
@@ -106,13 +92,14 @@ export default {
     }
 };
 </script>
+
 <template>
     <section class="streamers__area padd-top">
         <div class="container">
-            <div v-if="loading">
+            <div v-show="loading">
                 <Loader class="loader--hidden" />
             </div>
-            <JoinGame v-if="showJoinGame" @player-join="joinGame" />
+            <JoinGame v-if="showJoinGame" @close-join="closeJoinModal" />
             <Lobby :gamePlayers='gamePlayers' />
             <CustomButton v-if="isCreator" :text="'Play'" :emitName="'start-game'" @start-game="startGame" />
         </div>

@@ -1,10 +1,21 @@
 <script>
+import { ref } from 'vue';
+
+export default {
+    setup() {
+        const imgNumber = Math.floor(Math.random() * 8) + 1;
+        
+        return {
+            imgNumber
+        };
+    }
+}
 </script>
 
 <template>
-    <div>
-        <div class="blog-post-thumb">
-            <img src="images/blog/blog_post01.jpg" alt="img">
+    <div class="loader-holder">
+        <div class="blog-post-thumb img">
+            <img :src="`images/blog/g${imgNumber}.jpg`" alt="joining-game-loader">
             <p class="creating-p">Joining Game In Progress...</p>
         </div>
         <div class="progress-bar"></div>
@@ -12,11 +23,19 @@
 </template>
 
 <style>
+.loader-holder {
+    margin: 1rem 0;
+}
+
 .creating-p {
     padding: 1rem 0;
     font-family: 'Roboto', sans-serif;
     font-size: 24px;
     font-weight: bold;
+    text-align: center;
+}
+
+.img {
     text-align: center;
 }
 
