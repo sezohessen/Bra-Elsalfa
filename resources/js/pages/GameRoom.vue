@@ -2,15 +2,13 @@
 import { ref, reactive, onMounted, watchEffect, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Lobby from '@/components/Lobby';
-import CustomButton from '@/components/CustomButton';
 import Loader from '@/components/Loader';
 import JoinGame from '@/components/JoinGame';
-import { get, post } from '../api/api.js';
+import { get } from '../api/api.js';
 
 export default {
     components: {
         Lobby,
-        CustomButton,
         Loader,
         JoinGame
     },
@@ -28,7 +26,6 @@ export default {
         const playerIP = ref(localStorage.getItem('playerIP') || '127.0.0.1');
         const gamePlayers = reactive([]);
         const loading = ref(true);
-        const CreatorIP = ref();
 
         const fetchPlayer = async () => {
             try {
@@ -49,19 +46,6 @@ export default {
             return false;
         }
 
-        const getCreator = async () => {
-            try {
-                const response = await get(`creator/${gameId.value}`);
-                CreatorIP.value = response.ip_address;
-
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        const isCreator = computed(() => {
-            return CreatorIP.value == playerIP.value;
-        });
-
         const closeJoinModal = () => {
             showJoinGame.value = false;
         };
@@ -72,7 +56,6 @@ export default {
 
         onMounted(() => {
             fetchPlayer();
-            getCreator();
         });
 
         const showJoinGame = computed(() => {
@@ -86,7 +69,6 @@ export default {
             closeJoinModal,
             startGame,
             playerIP,
-            isCreator
         };
     }
 };
@@ -100,7 +82,6 @@ export default {
             </div>
             <JoinGame v-if="showJoinGame" @close-join="closeJoinModal" />
             <Lobby :gamePlayers='gamePlayers' />
-            <CustomButton v-if="isCreator" :text="'Play'" :emitName="'start-game'" @start-game="startGame" />
         </div>
     </section>
 </template>

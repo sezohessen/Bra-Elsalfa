@@ -1,7 +1,50 @@
 <script>
+import { get, post } from '../api/api.js';
+import { ref, onMounted, computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+import CustomButton from './CustomButton';
+
 export default {
     props: {
         gamePlayers: [],
+    },
+    components: {
+        CustomButton,
+    },
+    setup() {
+
+        const CreatorIP = ref();
+        const route = useRoute();
+        const gameId = ref(route.params.id);
+        const playerIP = ref(localStorage.getItem('playerIP') || '127.0.0.1');
+        
+        const getCreator = async () => {
+            try {
+                const response = await get(`creator/${gameId.value}`);
+                CreatorIP.value = response.ip_address;
+
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        const isCreator = computed(() => {
+            return CreatorIP.value == playerIP.value;
+        });
+
+        const startGame = () => {
+            console.error('working');
+        };
+
+        onMounted(() => {
+            getCreator();
+        });
+
+        return {
+            isCreator,
+            startGame
+        }
     }
 }
 </script>
@@ -33,5 +76,6 @@ export default {
             <div class="swiper-pagination streamers__pagination-dots"></div>
             <div class="slider-button-next streamers__pagination-arrow"><i class="fas fa-angle-right"></i></div>
         </div>
+        <CustomButton v-if="isCreator" :text="'Play'" :emitName="'start-game'" @start-game="startGame" />
     </div>
 </template>
