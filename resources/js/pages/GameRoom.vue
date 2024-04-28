@@ -86,4 +86,5 @@ export default {
 .padd-top {
     padding-top: 14rem;
 }
+
 </style>
