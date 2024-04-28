@@ -72,7 +72,7 @@ export default {
                         <a href="team-details.html"><img :src="`images/team/streamers0${index + 1}.png`" alt="img"></a>
                     </div>
                     <div class="streamers__content">
-                        <h4 class="name">{{ player.name }} / is auth    {{ getCurrentPlayer(player)  }}</h4>
+                        <h4 class="name">{{ player.name }}</h4>
                     </div>
 
                 </div>
