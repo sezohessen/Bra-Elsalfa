@@ -46,9 +46,6 @@ export default {
             return false;
         }
 
-        const closeJoinModal = () => {
-            showJoinGame.value = false;
-        };
 
         const startGame = () => {
             console.log('start game gooooooo');
@@ -66,7 +63,6 @@ export default {
             showJoinGame,
             gamePlayers,
             loading,
-            closeJoinModal,
             startGame,
             playerIP,
         };
@@ -80,7 +76,7 @@ export default {
             <div v-show="loading">
                 <Loader :message="'Joining Game In Progress...'" class="loader--hidden" />
             </div>
-            <JoinGame v-if="showJoinGame" @close-join="closeJoinModal" />
+            <JoinGame v-if="showJoinGame"/>
             <Lobby :gamePlayers='gamePlayers' />
         </div>
     </section>
