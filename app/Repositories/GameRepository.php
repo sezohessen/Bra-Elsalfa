@@ -14,9 +14,9 @@ class GameRepository implements RepositoryInterface
         return Game::all();
     }
 
-    public function getOne($id): ?Game
+    public function getOne($id): Game
     {
-        return Game::find($id);
+        return Game::findOrFail($id);
     }
 
     public function create($gameThemeId): Game

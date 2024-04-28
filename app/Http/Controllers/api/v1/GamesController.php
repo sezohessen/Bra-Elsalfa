@@ -6,14 +6,11 @@ use App\Events\PlayerJoinEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\JoinGameRequest;
 use App\Http\Requests\Game\StoreGameRequest;
-use App\Models\Game;
-use App\Models\GameTheme;
 use App\Models\Player;
 use App\Repositories\GameRepository;
 use App\Repositories\PlayerRepository;
 use Illuminate\Http\Request;
 use Faker\Factory;
-use Illuminate\Support\Str;
 
 
 class GamesController extends Controller
@@ -111,5 +108,10 @@ class GamesController extends Controller
     {
         $game = $this->gameRepository->getOne($game_id);
         return $game->creator();
+    }
+
+    public function startGame($gameId)
+    {
+        $game = $this->gameRepository->getOne($gameId);
     }
 }
