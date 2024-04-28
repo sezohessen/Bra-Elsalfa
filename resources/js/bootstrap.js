@@ -22,7 +22,7 @@ window.Pusher = Pusher;
 window.BaseURL = 'http://127.0.0.1:8000/';
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: 'local',
+    key: 'be54cbf1ddfcb66d423f',
     wsHost: window.location.hostname,
     cluster: 'mt1',
     wsPort: 6001,

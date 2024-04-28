@@ -21,7 +21,7 @@ export default {
 
         const joinGame = async () => {
             try {
-                if (isJoinRequestSend.value) { // Prevent multiple database calls  
+                if (isJoinRequestSend.value == true) { // Prevent multiple database calls  
                     return;
                 }
                 isJoinRequestSend.value = true;
@@ -64,7 +64,7 @@ export default {
                                     </div>
                                 </div>
                             </div>
-                            <CustomButton :text="'Join Lobby'" :emitName="'join-game'" @join-game="joinGame" />
+                            <CustomButton :text="'Join YSTA'" :emitName="'join-game'" @join-game="joinGame" />
                         </section>
                     </div>
                 </div>
